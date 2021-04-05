@@ -1,21 +1,18 @@
-import express from "express";
-import dotenv from "dotenv";
-import config from "./config";
-import mongoose from "mongoose";
+const express = require('express')
+const products = require('./data/products')
 
-dotenv.config();
+const app = express()
 
-const mongodbURL = config.MONGODB_URL;
-mongoose
-  .connect(mongodbURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  })
-  .catch((error) => console.log(error.reason));
+app.get('/', (req,res)=>{
+    res.send('API is running!')
+})
 
-const app = express();
+app.get('/api/products', (req,res)=>{
+    res.json(products)
+})
 
-app.listen(5000, () => {
-  console.log(`Server started at http://localhost:5000`);
-});
+app.get('/api/products/:id', (req,res)=>{
+    const product = products.find(p => p._id === req.params.id)
+    res.json(product)
+})
+app.listen(5001, console.log('Server is set up and running on port 5001'))
