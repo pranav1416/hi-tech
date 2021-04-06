@@ -1,0 +1,23 @@
+{
+  "name": "hi-tech",
+  "version": "1.0.0",
+  "description": "Hi-tech Electronic store (CPSC 462 Project)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pranav1416/hi-tech.git"
+  },
+  "author": "Pranav, Keira, Nour and Shraddha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pranav1416/hi-tech/issues"
+  },
+  "homepage": "https://github.com/pranav1416/hi-tech#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
