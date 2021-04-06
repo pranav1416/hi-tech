@@ -1,16 +1,12 @@
-import React from 'react';
+import React from 'react'
 import Button from 'react-bootstrap/Button';
-import Badge from 'react-bootstrap/Badge';
 import {Form, Col,Row} from "react-bootstrap";
-import ListGroup from 'react-bootstrap'
-import './Checkout.css';
-import CheckoutForm from '../components/CheckoutForm'
 
-const Checkout = () => {
+
+const CheckoutForm = () => {
     return (
-        <div  class ="grid_container" >
-           
-            {/* <Form>
+        <>
+         <Form>
             
             <h3>
                 Checkout 
@@ -69,21 +65,10 @@ const Checkout = () => {
 
                 <Button variant="primary" type="submit">
                     Continue Shopping
-  </Button>
-            </Form> */}
-            <Row>
-                <Col>
-                    <CheckoutForm/>
-                </Col>
-                <Col>
-                <h3> CHeckout summary</h3>
-                </Col>
-            </Row>
-            
-            
-        </div>
-        
-    );
+                </Button>
+            </Form>   
+        </>
+    )
 }
 
-export default Checkout;
+export default CheckoutForm
