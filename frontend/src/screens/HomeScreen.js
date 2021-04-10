@@ -18,6 +18,7 @@ const HomeScreen = () => {
 
     return (
         <>
+        <h1>Welcome to Hi-Tech Store</h1>
             <Row>
                 {products.map(product =>(
                     <Col sm={12} md={6} lg={4} xl={3}>
