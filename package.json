@@ -26,10 +26,17 @@
     "bootstrap": "^4.6.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+<<<<<<< HEAD
     "express-async-handler": "^1.1.4",
     "mongoose": "^5.12.3",
+=======
+    "react": "^17.0.2",
+>>>>>>> 21c5743f807a82ec1b0c2ed37c2009a81836de41
     "react-bootstrap": "^1.5.2",
-    "react-router-dom": "^5.2.0"
+    "react-dom": "^17.0.2",
+    "react-router-bootstrap": "^0.25.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3"
   },
   "devDependencies": {
     "concurrently": "^6.0.0",

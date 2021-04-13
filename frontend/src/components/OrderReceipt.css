@@ -1,0 +1,15 @@
+
+.receipt-box {
+    display:block;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    align-content: center;    
+  }
+
+.headereceipt {
+    text-align: center;
+    padding-bottom: 30px;
+    padding-top: 50px;
+  }
+
