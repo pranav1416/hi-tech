@@ -76,7 +76,7 @@ const Checkout = () => {
                     <CheckoutForm/>
                 </Col>
                 <Col>
-                <h3> CHeckout summary</h3>
+                <h3> Checkout summary</h3>
                 </Col>
             </Row>
             

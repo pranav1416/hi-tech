@@ -1,13 +1,26 @@
 import React from 'react'
+import Card from "react-bootstrap/Card";
+import { Navbar, Nav, Form, FormControl, Button, Container} from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 
-<Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src="holder.js/100px180" />
+const ProductObject = () => {
+
+  return (
+  
+  <Card  style={{ width: '18rem', top: "-200px", left: "200px"}}>
+  <Card.Img variant="top" src="/images/tv1.png" />
+
   <Card.Body>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+  <Card.Link style={{ fontSize: "18px",textAlign: "center", color: "Black"}} href="/product">Item Name</Card.Link>    
+  <Card.Text style={{ textAlign: "left"}} >
+      Price $$
     </Card.Text>
-    <Button variant="primary">Go somewhere</Button>
+    <Nav.Link style={{ textAlign: "right"}} href="/cart"><i className="fas fa-shopping-cart"></i> Cart</Nav.Link>
+
   </Card.Body>
 </Card>
+  )
+
+}
+
+export default ProductObject
