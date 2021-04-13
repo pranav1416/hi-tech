@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
 import Checkout from './screens/Checkout'
+import OrderReceipt from './components/OrderReceipt'
 
 const App = () => {
   return (
@@ -15,9 +16,10 @@ const App = () => {
     {/* py-3 is used to give vertical padding */}
     <Route path="/products/:_id" component={ProductScreen}/>
     <Route path="/checkout" component={Checkout}/>
+    <Route path="/orderReceipt" component={OrderReceipt}/>
     <main className="py-3">
       <Container>
-        <h1>Welcome to Hi-Tech Store</h1>
+      <h1>Welcome to Hi-Tech Store</h1>
         <Route path="/" exact={true} component={HomeScreen}/>
         <Route path="/products/:_id" component={ProductScreen}/>
       </Container>

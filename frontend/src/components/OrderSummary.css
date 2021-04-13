@@ -1,0 +1,41 @@
+body {
+    background-color: white;
+    color:black;
+    padding: 50px;
+    font-family: Arial;
+    text-align: left;
+  }
+ 
+  .greed_container {
+    display: grid;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    align-content: center;    
+  }
+
+  .mystyle{
+    color: black;
+    padding: 39px;
+    font-family: Arial;
+    text-align: left;
+    padding-left: 0px;
+  }
+
+  .order-column {
+    padding: 0px;
+  }
+
+  .subtotal_list{
+    padding-bottom: 0px;
+  }
+
+  .listgroup{
+    padding-top: 0px;
+  }
+
+  .table-order{
+    padding-bottom: 0px;
+    padding: 0px;
+  }
