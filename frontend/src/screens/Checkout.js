@@ -7,6 +7,8 @@ import './Checkout.css';
 import CheckoutForm from '../components/CheckoutForm'
 
 const Checkout = () => {
+
+
     return (
         <div  class ="grid_container" >
            

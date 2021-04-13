@@ -42,9 +42,9 @@ const orderSchema = new mongoose.Schema({
   contact: contactSchema,
   promoteCode: promoteSchema,
   itemsPrice: { type: Number },
-  taxPrice: { type: Number },
-  shippingPrice: { type: Number },
-  totalPrice: { type: Number },
+  taxPrice: { type: Number, default: 0.0 },
+  shippingPrice: { type: Number, default: 0.0 },
+  totalPrice: { type: Number, default: 0.0 },
   isPaid: { type: Boolean, default: false },
   paidAt: { type: Date },
   isDelivered: { type: Boolean, default: false },
@@ -53,5 +53,5 @@ const orderSchema = new mongoose.Schema({
   timestamps: true
 });
 
-const orderModel = mongoose.model('Order', orderSchema);
-export default checkoutModel;
+const orderModel = mongoose.model('Order', orderSchema)
+export default orderModel
