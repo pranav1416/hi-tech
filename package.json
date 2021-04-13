@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Hi-tech Electronic store (CPSC 462 Project)",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node backend/server",
@@ -23,8 +24,14 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+<<<<<<< HEAD
+    "express-async-handler": "^1.1.4",
+    "mongoose": "^5.12.3",
+=======
     "react": "^17.0.2",
+>>>>>>> 21c5743f807a82ec1b0c2ed37c2009a81836de41
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.2",
     "react-paginate": "^7.1.2",
