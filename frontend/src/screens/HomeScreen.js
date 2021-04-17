@@ -32,8 +32,7 @@ const HomeScreen = () => {
           {products.map((product) => (
             <Col sm={12} md={6} lg={4} xl={3}>
               <Product product={product} />
-              {console.log(product.countInStock)}
-              {/* {product.countInStock > 0 && (
+              {product.countInStock > 0 && (
                 <Row>
                   <Col>Qty: </Col>
                   <Col>
@@ -50,7 +49,7 @@ const HomeScreen = () => {
                     </Form.Control>
                   </Col>
                 </Row>
-              )} */}
+              )}
             </Col>
           ))}
         </Row>

@@ -8,11 +8,12 @@ dotenv.config()
 connectDB()
 const app = express()
 
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   res.send("API is running!")
 })
 
-app.use("/api/products", productRoutes)
+
+app.use('/api/products', productRoutes)
 app.use(notFound)
 app.use(errorHandler)
 

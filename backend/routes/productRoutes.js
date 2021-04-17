@@ -16,13 +16,13 @@ router.get('/', asyncHandler(async(req,res)=>{
 // @route GET /api/products
 // @access Public
 router.get('/:id', asyncHandler(async(req,res)=>{
-    const product = await Product.findOne({id: req.params.id})
+    // const product = products.products.find((x) => x._id === props.match.params.id)
+    const product = await Product.findOne({_id: req.params.id})
     if(product){
         res.send(product)
     }
     else {
-        res.status(404)
-        throw new Error('Product not found')
+        res.status(404).send({ message: 'Product Not Found.' });
     }
 }))
 
