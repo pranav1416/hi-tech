@@ -5,7 +5,7 @@ import Rating from './Rating'
 
 const Product = ({ product }) => {
   const productImages = product.imageURLs.split(',')
-  console.log(productImages)
+  // console.log(productImages)
   return (
     <Card className='my-3 p-3 rounded'>
       <Link to={`/product/${product._id}`}>
@@ -17,7 +17,7 @@ const Product = ({ product }) => {
       </Link>
 
       <Card.Body>
-        <Link to={`/product/${product._id}`}>
+        <Link to={`/product/${product.id}`}>
           <Card.Title as='div'>
             <strong>{product.name}</strong>
           </Card.Title>

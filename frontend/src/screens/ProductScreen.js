@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 //import products from '../products'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProductDetails } from '../actions/productActions'
+import AddToCart from '../components/AddToCart'
 
 function ProductScreen(props) {
+  // Add to Cart
+  const [qty, setQty] = useState(1)
   // Reducer code with request
   const dispatch = useDispatch()
 
   const productDetails = useSelector((state) => state.productDetails)
   const { loading, error, product } = productDetails
+
   useEffect(() => {
     dispatch(listProductDetails(props.match.params.id))
   }, [dispatch, props.match])
@@ -18,7 +22,7 @@ function ProductScreen(props) {
   return (
     <div className='details'>
       <div classname='details-image'>
-        <img src={product.image} alt='product'></img>
+        <img src={product.imageURLs} alt='product'></img>
       </div>
       <div classname='details-info'>
         <ul>
@@ -45,7 +49,7 @@ function ProductScreen(props) {
             </select>
           </li>
           <li>
-            <button>Add to cart</button>
+            <AddToCart maxCount={product.countInStock} />
           </li>
         </ul>
       </div>
