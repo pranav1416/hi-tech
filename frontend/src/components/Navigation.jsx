@@ -15,12 +15,7 @@ const Navigation = () => {
   <Nav.Link style={{ fontSize: "18px",color: "Black"}} href="/Mobiles">Mobiles</Nav.Link>
   <Nav.Link style={{ fontSize: "18px",color: "Black"}} href="/Home Automation">Home Automation</Nav.Link>
   <Nav.Link style={{ fontSize: "18px",color: "Black"}} href="/Office Tech">Office Tech</Nav.Link>
-
-
-  <Nav.Link eventKey="disabled" disabled>
-    Disabled
-  </Nav.Link>
-</Nav>
+  </Nav>
 
     )
 
