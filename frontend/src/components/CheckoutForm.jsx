@@ -5,8 +5,8 @@ import { Form, Col, Row } from "react-bootstrap";
 import { Radio, RadioGroup } from "react-radio-group";
 import { useHistory } from "react-router-dom";
 import "./Checkout.css";
-
-const CheckoutForm = () => {
+const CheckoutForm = ({ user }) => {
+  console.log('CheckoutForm user : ' + JSON.stringify(user));
   const history = useHistory();
 
   const [validated, setValidated] = useState(false);
@@ -38,6 +38,7 @@ const CheckoutForm = () => {
             required
             type="email"
             placeholder="Enter Email Address"
+            value={user.email}
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
@@ -53,6 +54,7 @@ const CheckoutForm = () => {
               required
               type="Firstname"
               placeholder="Enter First Name"
+              value={user.firstName}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
@@ -63,6 +65,7 @@ const CheckoutForm = () => {
               required
               type="Lastname"
               placeholder="Enter Last name"
+              value={user.lastName}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
@@ -70,18 +73,18 @@ const CheckoutForm = () => {
 
         <Form.Group controlId="formGridAddress1">
           <Form.Label>Address</Form.Label>
-          <Form.Control required placeholder="1234 Main St" />
+          <Form.Control required placeholder="1234 Main St" value={user.address.addr}/>
         </Form.Group>
 
         <Form.Group controlId="formGridAddress2">
           <Form.Label>Address 2</Form.Label>
-          <Form.Control required placeholder="Apartment, studio, or floor" />
+          <Form.Control required placeholder="Apartment, studio, or floor" value={user.address.addr2}/>
         </Form.Group>
 
         <Form.Row>
           <Form.Group as={Col} controlId="formGridCity">
             <Form.Label>City</Form.Label>
-            <Form.Control type="text" placeholder="City" required />
+            <Form.Control type="text" placeholder="City" required value={user.address.city}/>
             <Form.Control.Feedback type="invalid">
               Please provide a valid city.
             </Form.Control.Feedback>
@@ -94,6 +97,7 @@ const CheckoutForm = () => {
               type="text"
               as="select"
               defaultValue="Choose..."
+              value={user.address.state}
             >
               <option>California</option>
               <option>Nevada</option>
@@ -105,7 +109,7 @@ const CheckoutForm = () => {
 
           <Form.Group as={Col} controlId="formGridZip">
             <Form.Label>Zip</Form.Label>
-            <Form.Control type="digit" placeholder="Zip" required />
+            <Form.Control type="digit" placeholder="Zip" required value={user.address.zipcode}/>
             <Form.Control.Feedback type="invalid">
               Please provide a valid zip.
             </Form.Control.Feedback>

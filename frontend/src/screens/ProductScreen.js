@@ -17,8 +17,9 @@ const ProductScreen = (props) => {
     }
   }, [dispatch, props.match])
 
-  const handleAddToCart = () => {
-    props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
+const handleAddToCart = () => {
+  //TODO - Add userID from login context
+    props.history.push('/cart/' + props.match.params.id + '?qty=' + qty + '&userID=607cb3b23b970207bdbf419e');
   };
 
   console.log(props.match.params.id)

@@ -5,10 +5,21 @@ import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
 import { addToCart } from '../actions/cartActions'
 
+function parseQuery(queryString) {
+  var query = {};
+  var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+  for (var i = 0; i < pairs.length; i++) {
+      var pair = pairs[i].split('=');
+      query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+  }
+  return query;
+}
+
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id
-
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1
+  var queryParams = parseQuery(location.search);
+  const qty = queryParams['qty'] ? Number(queryParams['qty']) : 1
+  const userID = queryParams['userID'] ? queryParams['userID'] : 1
 
   const dispatch = useDispatch()
 
@@ -17,9 +28,9 @@ const CartScreen = ({ match, location, history }) => {
 
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId, qty))
+      dispatch(addToCart(productId, qty, userID))
     }
-  }, [dispatch, productId, qty])
+  }, [dispatch, productId, qty, userID])
 
   return (
     <Row>

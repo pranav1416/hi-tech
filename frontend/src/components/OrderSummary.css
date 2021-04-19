@@ -39,3 +39,7 @@ body {
     padding-bottom: 0px;
     padding: 0px;
   }
+
+  .listgroup-right-borderless{
+    border-right: 0 none
+  }
