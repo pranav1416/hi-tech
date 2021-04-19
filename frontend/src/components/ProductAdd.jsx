@@ -8,7 +8,7 @@ const ProductAdd = ({product}) => {
     const [qty, setQty] = useState(1);
 
     function handleAddToCart() {
-        history.push('/cart/' + product.name + '?qty=' + qty);
+        history.push('/cart/' + product.product + '?qty=' + qty + '&userID=607cb3b23b970207bdbf419e');
     };
     return (
         <Jumbotron>

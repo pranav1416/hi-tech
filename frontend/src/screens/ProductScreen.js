@@ -21,10 +21,6 @@ const ProductScreen = (props) => {
     }
   }, [dispatch, props.match])
 
-const handleAddToCart = () => {
-  //TODO - Add userID from login context
-    props.history.push('/cart/' + props.match.params.id + '?qty=' + qty + '&userID=607cb3b23b970207bdbf419e');
-  };
 
   console.log(props.match.params.id)
   //const product = products.products.find((x) => x._id === props.match.params.id)
