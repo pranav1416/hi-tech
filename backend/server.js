@@ -4,10 +4,12 @@ import connectDB from "./config/db.js"
 import productRoutes from "./routes/productRoutes.js"
 import userRoutes from "./routes/userRoutes.js"
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js"
+import bodyParser from 'body-parser';
 dotenv.config()
 
 connectDB()
 const app = express()
+// app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.send("API is running!")
