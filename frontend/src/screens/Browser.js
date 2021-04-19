@@ -7,15 +7,19 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Row, Col} from 'react-bootstrap'
 
 
-
-
 const Browser = () => {
 {
  return (
      <>
-<h1>Browser</h1>
 <Navigation/>
 <ProductObject/>
+{/* <Row>
+          {ProductObject.map((product) => (
+            <Col sm={12} md={6} lg={4} xl={3}>
+              <ProductObject product={product} />
+            </Col>
+          ))}
+        </Row> */}
 
 </>
 )

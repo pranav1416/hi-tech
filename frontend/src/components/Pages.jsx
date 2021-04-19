@@ -1,30 +1,38 @@
 //To move between pages
 
-// import React from 'react'
-// import ReactPaginate from 'react-paginate';
+import React from 'react'
+//import {Pagination} from "reactstrap";
+import {render} from 'react-dom';
+import {Pagination, paginationBasic} from "react-bootstrap";
 
-// const Pages = () => {
-//     return (
-//         <div>
-//  <Pagination>
-//   <Pagination.First />
-//   <Pagination.Prev />
-//   <Pagination.Item>{1}</Pagination.Item>
-//   <Pagination.Ellipsis />
+let active = 2;
+        let items = [];
+        for (let number = 1; number <= 5; number++) {
+          items.push(
+            <Pagination.Item key={number} active={number === active}>
+              {number}
+            </Pagination.Item>,
+          );
+        }
 
-//   <Pagination.Item>{10}</Pagination.Item>
-//   <Pagination.Item>{11}</Pagination.Item>
-//   <Pagination.Item active>{12}</Pagination.Item>
-//   <Pagination.Item>{13}</Pagination.Item>
-//   <Pagination.Item disabled>{14}</Pagination.Item>
 
-//   <Pagination.Ellipsis />
-//   <Pagination.Item>{20}</Pagination.Item>
-//   <Pagination.Next />
-//   <Pagination.Last />
-//     </Pagination>
-//         </div>
-//     )
-// }
+const Pages = () => {
+    return (
 
-// export default Pages
+          <div>
+            <Pagination>{items}</Pagination>
+            <br />
+        
+            <Pagination size="lg">{items}</Pagination>
+            <br />
+        
+            <Pagination size="sm">{items}</Pagination>
+          </div>
+        );
+        
+        render(Pages);
+    
+    }
+    
+
+export default Pages
