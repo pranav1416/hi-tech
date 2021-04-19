@@ -11,6 +11,7 @@ const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
   cart: cartReducer,
+  // productReview: reviewReducer,
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')

@@ -50,7 +50,12 @@ export const listProductDetails = (id) => async (dispatch) => {
         countInStock: data.countInStock,
         weight: data.weight,
         brand: data.brand,
-        rating: data.reviews.rating,
+        reviewName: data.reviews.name,
+        reviewRating: data.reviews.rating,
+        reviewComment: data.reviews.comment,
+        description: data.categories,
+        productCode: data.upc,
+        customQty: data.qty,
       },
     })
   } catch (error) {
