@@ -30,7 +30,7 @@ const Header = () => {
                 <i className='fas fa-shopping-cart'></i> Cart
               </Nav.Link>
             </LinkContainer>
-            <Nav.Link href='#login'>Signup/Login</Nav.Link>
+            <Nav.Link href='/login'>Signup/Login</Nav.Link>
           </Nav>
           <Form inline>
             <FormControl type='text' placeholder='Search' className='mr-sm-2' />
