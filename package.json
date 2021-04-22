@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "concurrently": "^6.0.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "nodemon": "^2.0.7"
   }
 }
