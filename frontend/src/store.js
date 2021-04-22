@@ -6,12 +6,13 @@ import {
   productDetailsReducer,
 } from './reducers/productReducer'
 import { cartReducer } from './reducers/cartReducer'
-import { userLoginReducer } from './reducers/userReducer'
+import { userLoginReducer, userRegisterReducer } from './reducers/userReducer'
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
   // productReview: reviewReducer,
 })
 
@@ -35,9 +36,9 @@ const store = createStore(
   reducer,
   initialState,
   composeEnhancers(
-    applyMiddleware(thunk, ...middleware),
+    applyMiddleware(thunk, ...middleware)
     // other store enhancers if any
   )
-);
+)
 
 export default store

@@ -25,10 +25,8 @@ const App = () => {
         <Route path='/checkout' component={Checkout} />
         <Route path='/browser' component={Browser} />
         <Route path='/orderReceipt' component={OrderReceipt} />
-        <main className='py-3'>
-          <Container>
-            <Route path='/' exact={true} component={HomeScreen} />
-          </Container>
+        <main>
+          <Route path='/' exact={true} component={HomeScreen} />
         </main>
         <Footer />
       </>

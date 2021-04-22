@@ -1,34 +1,29 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import LoginForm from '../components/LoginForm';
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import LoginForm from '../components/LoginForm'
 import { Row, Col } from 'react-bootstrap'
 
-
-const LoginScreen = (props) => {
-  
+const LoginScreen = ({ history }) => {
   const dispatch = useDispatch()
+  const userLogin = useSelector((state) => state.userLogin)
+  const { loading, error, userInfo } = userLogin
+
   useEffect(() => {
-    
-    return () => {
-      
+    if (userInfo) {
+      history.push('/')
     }
-  }, [dispatch, props.match])
+    return () => {}
+  }, [dispatch, history])
 
-
-  console.log(props.match.params.id)
-  //const product = products.products.find((x) => x._id === props.match.params.id)
   return (
     <>
-    <Row>
-        
+      <Row>
         <Col></Col>
         <Col>
-            <LoginForm />
+          <LoginForm />
         </Col>
         <Col></Col>
-        
-        
-    </Row>
+      </Row>
     </>
   )
 }
