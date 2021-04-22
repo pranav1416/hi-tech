@@ -7,6 +7,7 @@ const ProductAdd = ({ history, product, match }) => {
   //let history = useHistory()
   const [qty, setQty] = useState(1)
 
+<<<<<<< HEAD
   function handleAddToCart() {
     history.push(`/cart/${match.params.id}?qty=${qty}`)
   }
@@ -17,6 +18,18 @@ const ProductAdd = ({ history, product, match }) => {
       <p>
         {product.countInStock > 0 ? (
           <>
+=======
+    function handleAddToCart() {
+        history.push('/cart/' + product.product + '?qty=' + qty + '&userID=607cb3b23b970207bdbf419e');
+    };
+    return (
+        <Jumbotron>
+            <h1>$ {product.price} </h1>
+            <p>
+                Availibity: {product.countInStock} in stock!
+            </p>
+            <p>
+>>>>>>> f8ffad723b5605177a5ce99b8177002326b881db
             <Form>
               <Form.Group controlId='exampleForm.SelectCustom'>
                 <Form.Control

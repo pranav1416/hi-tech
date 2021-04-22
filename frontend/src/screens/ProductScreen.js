@@ -20,6 +20,9 @@ const ProductScreen = (props) => {
     return () => {}
   }, [dispatch, props.match])
 
+
+  console.log(props.match.params.id)
+  //const product = products.products.find((x) => x._id === props.match.params.id)
   return (
     <>
       {loading ? (

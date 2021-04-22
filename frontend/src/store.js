@@ -34,7 +34,10 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
   reducer,
   initialState,
-  composeEnhancers(applyMiddleware(thunk))
-)
+  composeEnhancers(
+    applyMiddleware(thunk, ...middleware),
+    // other store enhancers if any
+  )
+);
 
 export default store
