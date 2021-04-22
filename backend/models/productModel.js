@@ -10,9 +10,9 @@ const priceSchema = new mongoose.Schema({
 })
 const reviewSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
-    rating: { type: Number, default: 0 },
-    comment: { type: String, required: true },
+    reviewName: { type: String, required: "" },
+    reviewRating: { type: Number, default: 0 },
+    reviewComment: { type: String, required: "" },
   },
   {
     timestamps: true,
@@ -30,7 +30,7 @@ const productSchema = new mongoose.Schema({
   primaryCategories: { type: String, required: true },
   upc: { type: Number, required: true },
   weight: { type: String },
-  reviews: [reviewSchema],
+  review: [reviewSchema],
 });
 
 const Product = mongoose.model('Product', productSchema);

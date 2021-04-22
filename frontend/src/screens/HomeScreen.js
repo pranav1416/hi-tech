@@ -32,24 +32,6 @@ const HomeScreen = () => {
           {products.map((product) => (
             <Col sm={12} md={6} lg={4} xl={3}>
               <Product product={product} />
-              {product.countInStock > 0 && (
-                <Row>
-                  <Col>Qty: </Col>
-                  <Col>
-                    <Form.Control
-                      as='select'
-                      value={qty}
-                      onChange={(e) => setQty(e.target.value)}
-                    >
-                      {[...Array(product.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
-                    </Form.Control>
-                  </Col>
-                </Row>
-              )}
             </Col>
           ))}
         </Row>
