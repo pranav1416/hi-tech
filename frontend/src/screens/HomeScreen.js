@@ -1,12 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, FormControl, Form } from 'react-bootstrap'
 import Product from '../components/Product'
 import { listProducts } from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
 const HomeScreen = () => {
+  // PRODUCT SCREEN MODULE : [TESTING]
+  // Add to cart and quantity select
+  const [qty, setQty] = useState(0)
+
   const dispatch = useDispatch()
 
   const productList = useSelector((state) => state.productList)

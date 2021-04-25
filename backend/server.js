@@ -7,8 +7,9 @@ import orderHistoryRoutes from "./routes/orderHistoryRoutes.js"
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js"
 import bodyParser from 'body-parser';
 import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+import BrowserRoutes from './routes/browserRoutes.js'
 
+const require = createRequire(import.meta.url);
 var cors = require('cors')
 dotenv.config()
 
@@ -16,11 +17,11 @@ connectDB()
 const app = express()
 app.use(bodyParser());
 app.use(cors());
+app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.send("API is running!")
+  res.send('API is running!')
 })
-
 
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
