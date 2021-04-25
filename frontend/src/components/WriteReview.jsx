@@ -34,7 +34,9 @@ const WriteReview = ({ user }) => {
             <Form.Control type="rating" placeholder="Share details about what you like or dislike." />
             </Col>
         </Form.Group>
+        <Button variant="primary"> Submit </Button>
         </Form>
+        
 
         // <Tab eventKey="write your review" title="Write Your Review">
         //     <>
