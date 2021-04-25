@@ -13,14 +13,6 @@ const Checkout = () => {
     const { cartItems } = cartList
     console.log(cartItems);
 
-    //Take user info from first cart item
-    var user;
-    if (cartItems && cartItems.length > 0) {
-        console.log('Something in cart');
-        var cart = cartItems[0];
-        user = cart.user;
-    }
-
     return (
         <Container>
             <h3> Checkout summary</h3>
@@ -31,7 +23,7 @@ const Checkout = () => {
                 ) : (
                 <Row>
                     <Col>
-                        <CheckoutForm user={user}/>
+                        <CheckoutForm cartItems={cartItems}/>
                     </Col>
                     <Col>
                         <OrderSummary cartItems={cartItems}/>
