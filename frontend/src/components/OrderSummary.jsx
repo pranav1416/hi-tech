@@ -1,113 +1,76 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import ListGroup from 'react-bootstrap/ListGroup'
-import { Form, Col, Row, Image } from "react-bootstrap";
-import Message from '../components/Message'
-import './OrderSummary.css';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import ListGroup from "react-bootstrap/ListGroup";
+import { Table, Col, Row, Image, Container } from "react-bootstrap";
+import Message from "../components/Message";
+import "./OrderSummary.css";
 
-const sum = function(items){
-    return items.reduce( function(a, b){
-        return a + b['price'] * b['qty'];
-    }, 0);
+const sum = function (items) {
+  return items.reduce(function (a, b) {
+    return a + b["price"] * b["qty"];
+  }, 0);
 };
 const OrderSummary = ({ cartItems }) => {
-    //console.log(cartItems)
-    var subTotal = sum(cartItems);
-    //console.log('SubTotal " '  + subTotal);
-    return (
-        <Form>
-            <h4 class="mystyle" >Order Summary</h4>
-            
-            <Row>
-            <Col xs="12">
-                {cartItems.length === 0 ? (
-                    <Message>
-                        Your cart is empty <Link to='/'>Go Back</Link>
-                    </Message>
-                ) : (
-                    <div>
-                        {cartItems.map((cartItem) => (
-                            <ListGroup className="listgroup" horizontal='sm' key={cartItem.product} >
-                            {/* <ListGroup.Item>
-                                <div>
-                                    <img src={cartItem.image} alt={cartItem.image} className="" />
-                                </div>
-                            </ListGroup.Item> */}
-                            <ListGroup.Item className="listgroup-right-borderless">{cartItem.name}</ListGroup.Item>
-                            <ListGroup.Item className="listgroup-right-borderless">{cartItem.price}</ListGroup.Item>
-                            <ListGroup.Item>{cartItem.qty}</ListGroup.Item>
-                            </ListGroup>
-                        ))}
-                        </div>
-                    
-                )}
-                </Col>
-            </Row>
+  //console.log(cartItems)
+  var subTotal = 0;
+  if (cartItems) {
+    subTotal = sum(cartItems);
+  }
+  //console.log('SubTotal " '  + subTotal);
+  return (
+    <Container>
+      <h4 class="mystyle">Order Summary</h4>
 
-            <Row>
-                <Col xs="12">
-                    <ListGroup className="listgroup">
-                        <ListGroup.Item>Saving</ListGroup.Item>
-                        <ListGroup.Item className="subtotal">SubTotal : {subTotal}</ListGroup.Item>
-                        <ListGroup.Item>Promo Code</ListGroup.Item>
-                        <ListGroup.Item>Total</ListGroup.Item>
-
-                    </ListGroup>
-                </Col>
-            </Row>
-
-        </Form>
-
-    );
-}
-
-// const OrderSummary = ({ cartItem }) => {
-//     return (
-//         <Form>
-//             <Row>
-//                 <Col xs="12">
-//                     <Table striped bordered hover className="table-order">
-//                         <thead>
-//                             <tr>
-//                                 <th>Product</th>
-//                                 <th>Price</th>
-//                             </tr>
-//                         </thead>
-//                         <tbody>
-//                             <tr>
-//                                 <td>Product1</td>
-//                                 <td>500</td>
-//                             </tr>
-//                             <tr>
-//                                 <td>Product2</td>
-//                                 <td>300</td>
-//                             </tr>
-//                             <tr>
-//                                 <td>Product3</td>
-//                                 <td>800</td>
-//                             </tr>
-//                         </tbody>
-//                     </Table>
-//                 </Col>
-//             </Row>
-
-//             <Row>
-//                 <Col xs="12">
-//                     <ListGroup className="listgroup">
-//                         <ListGroupItem>Saving</ListGroupItem>
-//                         <ListGroupItem className="subtotal">SubTotal</ListGroupItem>
-//                         <ListGroupItem>Promo Code</ListGroupItem>
-//                         <ListGroupItem>Total</ListGroupItem>
-
-//                     </ListGroup>
-//                 </Col>
-//             </Row>
-
-//         </Form>
-
-//     );
-// }
-
-
+      <Row>
+        <Col xs="12">
+          {!cartItems || cartItems.length === 0 ? (
+            <Message>
+              Your cart is empty <Link to="/">Go Back</Link>
+            </Message>
+          ) : (
+            <Table bordereless responsive>
+              <thead>
+                <tr className="order-summary_tr">
+                  <th>NAME</th>
+                  <th>QTY</th>
+                  <th>PRICE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cartItems.map((cartItem) => (
+                    <tr key={cartItem.product} className="order-summary_tr">
+                        <td key="name">{cartItem.name}</td>
+                        <td key="quantity">{cartItem.qty}</td>
+                        <td key="price">{cartItem.price}</td>
+                    </tr>
+                ))}
+                <tr scolSpan="2" className="order_price">
+                    <td>SubTotal</td>
+                    <td></td>
+                    <td>{subTotal}</td>
+                </tr>
+                <tr colSpan="2" className="order_price">
+                    <td className="order_price">Tax</td>
+                    <td></td>
+                    <td>10</td>
+                </tr>
+                <tr colSpan="2" className="order_price">
+                    <td>Discount</td>
+                    <td></td>
+                    <td>$0.00</td>
+                </tr>
+                <tr colSpan="2" className="order_price">
+                    <td>Order Total</td>
+                    <td></td>
+                    <td>$0.00</td>
+                </tr>
+              </tbody>
+            </Table>
+          )}
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
 export default OrderSummary;
