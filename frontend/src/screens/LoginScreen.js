@@ -4,13 +4,22 @@ import LoginForm from '../components/LoginForm'
 import { Row, Col } from 'react-bootstrap'
 
 const LoginScreen = ({ history }) => {
+  console.log('User Login page ' + JSON.stringify(history));
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
   const { loading, error, userInfo } = userLogin
+  const [redirecturl, setRedirectUrl] = useState("");
+  if (history && history.location && history.location.search) {
+    var urls = history.location.search.split('=');
+    if (userInfo && urls && urls.length > 1) {
+      setRedirectUrl("/"+urls[1]);
+      history.push(redirecturl);
+    }
+  }
 
   useEffect(() => {
     if (userInfo) {
-      history.push('/')
+      history.push(redirecturl);
     }
     return () => {}
   }, [dispatch, history])

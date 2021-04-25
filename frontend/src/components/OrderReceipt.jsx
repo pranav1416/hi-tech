@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch } from 'react-redux'
 import { Container, Col, Row, } from "react-bootstrap";
 import "./OrderReceipt.css";
 import Message from "../components/Message";
 import OrderSummary from "../components/OrderSummary";
+import { removeAllFromCart } from '../actions/cartActions'
 
 const HttpProxyAgent = require("http-proxy-agent");
 
@@ -27,6 +29,7 @@ const OrderReceipt = () => {
   const [orderDateMessage, setOrderDateMessage] = useState(null);
   const [orderReceiptError, setOrderReceiptError] = useState(null);
   const [cartItems, setCartItems] = useState(null);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     async function saveOrderHistory() {
@@ -70,6 +73,8 @@ const OrderReceipt = () => {
         setOrderMessage("Order Number : " + response.data._id);
         setOrderDateMessage("Order Date : " + response.data.orderDate);
         setCartItems(orderItems);
+        dispatch(removeAllFromCart());
+        
       }
     }
     saveOrderHistory();

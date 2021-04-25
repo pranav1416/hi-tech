@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import { Form, Col, Row } from "react-bootstrap";
 import { Radio, RadioGroup } from "react-radio-group";
 import { useHistory } from "react-router-dom";
+import { useSelector } from 'react-redux'
 import "./Checkout.css";
 
 const sum = function(items){
@@ -12,38 +13,18 @@ const sum = function(items){
   }, 0);
 };
 
-const CheckoutForm = ({ user, cartItems }) => {
-  //Take user info from first cart item
-
-  user = {
-    _id: "",
-    email: "",
-    firstName: "",
-    lastName: "",
-    address: {
-      addr: "",
-      addr2: "",
-      city: "",
-      state: "",
-      zipcode: "",
-    },
-  };
-
-  if (cartItems && cartItems.length > 0) {
-    console.log("Something in cart");
-    var cart = cartItems[0];
-    user = cart.user;
-  }
-  const [email, setEmail] = useState(user.email);
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [addr, setAddr] = useState(user.address.addr);
-  const [addr2, setAddr2] = useState(user.address.addr2);
-  const [city, setCity] = useState(user.address.city);
-  const [stateV, setStateV] = useState(user.address.state);
-  const [zipcode, setZipCode] = useState(user.address.zipcode);
-
-  console.log("CheckoutForm user : " + JSON.stringify(cartItems));
+const CheckoutForm = ({ cartItems }) => {
+  const userLogin = useSelector((state) => state.userLogin)
+  const { loading, error, userInfo } = userLogin
+  
+  const [email, setEmail] = useState(userInfo.email);
+  const [firstName, setFirstName] = useState(userInfo.firstName);
+  const [lastName, setLastName] = useState(userInfo.lastName);
+  const [addr, setAddr] = useState(userInfo.address[0].addr1);
+  const [addr2, setAddr2] = useState(userInfo.address[0].addr2);
+  const [city, setCity] = useState(userInfo.address[0].city);
+  const [stateV, setStateV] = useState(userInfo.address[0].state);
+  const [zipcode, setZipCode] = useState(userInfo.address[0].zipcode);
   const history = useHistory();
 
   const [validated, setValidated] = useState(false);
@@ -63,7 +44,7 @@ const CheckoutForm = ({ user, cartItems }) => {
       var total = subTotal + salesTax;
       var payload = {
         products: [],
-        userID: user._id,
+        userID: userInfo._id,
         price: {
           subtotal: subTotal,
           tax: salesTax,
