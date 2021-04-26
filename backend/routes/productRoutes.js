@@ -1,31 +1,40 @@
 import express from 'express'
+import expressAsyncHandler from 'express-async-handler'
 const router = express.Router()
 import {
   getProductById,
   getProducts,
 } from '../controllers/productController.js'
+import Review from '../models/reviewModel.js'
+import Product from '../models/productModel.js'
 
 router.route('/').get(getProducts)
 
 router.route('/:id').get(getProductById)
 
-// router.post('/:id', asyncHandler(async(req,res)=>{
-//     // const product = products.products.find((x) => x._id === props.match.params.id)
-//     const review = await Product.findOne({
-//         name: req.reviews.name,
-//         rating: req.reviews.rating,
-//         comment: req.reviews.comment,
-//     })
-//     if(review){
-//         res.send({
-//             name: review.name,
-//             rating: review.rating,
-//             comment: review.comment,
-//         })
-//     }
-//     else {
-//         res.status(404).send({ message: 'Invalid' });
-//     }
-// }))
+router.post('/review', expressAsyncHandler(async(req,res)=>{
+    const review = new Review ({
+      reviewName: req.body.name,
+      reviewRating: req.body.rating,
+      reviewComment: req.body.comment
+    })
+    
+    const createdReview = await review.save()
+
+    const updatedProduct = await Product.update({
+      _id: req.body.productId,
+      // name: req.body.name,
+      // rating: req.body.rating,
+      // comment: req.body.comment
+    }, {
+      $push: {
+        reviews: createdReview._id
+      }
+    });
+    console.log(updatedProduct)
+
+    res.send(updatedProduct)
+        
+}))
 
 export default router
