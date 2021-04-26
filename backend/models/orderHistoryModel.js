@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 
-const userHistorySchema = new mongoose.Schema(
+const orderHistorySchema = new mongoose.Schema(
   {
     products: [
       {
         productID: { type: String, required: true },
+        image: { type: String, required: true },
         name: { type: String, required: true },
         price: { type: Number, required: true },
         qty: { type: Number, required: true },
@@ -12,8 +13,9 @@ const userHistorySchema = new mongoose.Schema(
     ],
     userID: { type: String, required: true },
     price: {
-      subtotal: { type: Number, required: true },
+      subTotal: { type: Number, required: true },
       tax: { type: Number, required: true },
+      discount: { type: Number, required: true },
       total: { type: Number, required: true },
     },
     shipping: {
@@ -39,6 +41,6 @@ const userHistorySchema = new mongoose.Schema(
   }
 );
 
-const userHistoryModel = mongoose.model("UserHistory", userHistorySchema);
+const orderHistoryModel = mongoose.model("orderHistory", orderHistorySchema);
 
-export default userHistoryModel;
+export default orderHistoryModel;
