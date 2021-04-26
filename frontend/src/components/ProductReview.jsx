@@ -7,19 +7,40 @@ import WriteReview from './WriteReview'
 const ProductReview = ({ product }) => {
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
+
+    // const dispatch = useDispatch()
+
+    // const productList = useSelector((state) => state.productList)
+    // const {  products } = productList
+
+    // useEffect(() => {
+    //     dispatch(listProducts())
+    // }, [dispatch])
+
     return (
         <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
             <Tab eventKey="customer reviews" title="Customer Reviews">
+                {/* <List> 
+                    reviews.map.((review) => {  
+                        <ReviewListItemComponentreview = {review} /> 
+                    })
+                </List> */}
                 <ListGroup>
-                    <ListGroup.Item> {product.reviewName} ({product.reviewRating} / 5): {product.reviewComment}</ListGroup.Item>
-                    
+                        {product.reviews?.map((review) => (
+                        <ListGroup.Item> 
+                            {review.reviewName} 
+                            ({review.reviewRating} / 5): {review.reviewComment}
+                        </ListGroup.Item>
+                    ))}
                 </ListGroup>
+                
+    
             </Tab>
             <Tab eventKey="write your review" title="Write Your Review">
                 <>
                     {
                         userInfo ? (
-                            <WriteReview user={userInfo} />
+                            <WriteReview product={product} user={userInfo} />
                             
                         ) : (
                             <h2> Please Login </h2>
