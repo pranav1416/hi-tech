@@ -5,6 +5,11 @@ import Product from '../components/Product'
 import { listProducts } from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import BannerAdd from '../components/BannerAdd'
+import  ProductSale from '../components/ProductSale'
+import ProductAdd from '../components/ProductAdd'
+import ProductsDisplayed from '../components/ProductsDisplayed'
+
 
 const HomeScreen = () => {
   // PRODUCT SCREEN MODULE : [TESTING]
@@ -23,18 +28,28 @@ const HomeScreen = () => {
   return (
     <>
       <h1>Welcome to Hi-Tech Store</h1>
+      <>
+      <BannerAdd />
+      <ProductSale />
+      </>
+      <ProductsDisplayed/>
+      
       {loading ? (
-        <Loader />
+      <Loader /> 
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <Row>
+        <>
+        <Row style = {{paddingTop: '450px'}}>
           {products.map((product) => (
             <Col sm={12} md={6} lg={4} xl={3}>
-              <Product product={product} />
+              <Product style= {{paddingTop: '10px'}} product={product} />
             </Col>
           ))}
         </Row>
+        </>
+      
+        
       )}
     </>
   )

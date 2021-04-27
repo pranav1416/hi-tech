@@ -11,13 +11,13 @@ import Browser from './screens/Browser'
 import CartScreen from './screens/CartScreen'
 
 import OrderReceipt from './components/OrderReceipt'
+import BannerAdd from './components/BannerAdd'
 
 const App = () => {
   return (
     <BrowserRouter>
       <>
         <Header />
-
         {/* py-3 is used to give vertical padding */}
         <Route path='/product/:id' component={ProductScreen} />
         <Route path='/login' component={LoginScreen} />
