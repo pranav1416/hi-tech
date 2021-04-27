@@ -8,16 +8,7 @@ const priceSchema = new mongoose.Schema({
   isSale: { type: Boolean, required: true, default: false },
 
 })
-const reviewSchema = new mongoose.Schema(
-  {
-    reviewName: { type: String, required: "" },
-    reviewRating: { type: Number, default: 0 },
-    reviewComment: { type: String, required: "" },
-  },
-  {
-    timestamps: true,
-  }
-);
+
 
 const productSchema = new mongoose.Schema({
   id: { type: String, required: true },
@@ -30,10 +21,12 @@ const productSchema = new mongoose.Schema({
   primaryCategories: { type: String, required: true },
   upc: { type: Number, required: true },
   weight: { type: String },
-  review: [reviewSchema],
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review', required: false }],
 });
 
 const Product = mongoose.model('Product', productSchema);
+// const Review = mongoose.model('Review', reviewSchema);
 
 export default Product;
+// export default Review;
 

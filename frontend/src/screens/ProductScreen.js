@@ -14,6 +14,10 @@ const ProductScreen = (props) => {
   const [qty, setQty] = useState(1)
   const productDetails = useSelector((state) => state.productDetails)
   const { loading, error, product } = productDetails
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+  
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(listProductDetails(props.match.params.id))
@@ -36,7 +40,15 @@ const ProductScreen = (props) => {
           </Col>
           <Col>
             <ProductDetail product={product} />
-            <ProductReview product={product} />
+            <ProductReview product={product} user={userInfo} />
+            {/* {
+              userInfo ? (
+                <ProductReview product={product} user={userInfo}/>
+              ) : (
+                <h1> Please Login</h1>
+              )
+            } */}
+            
           </Col>
           <Col>
             <ProductAdd {...props} product={product} />
