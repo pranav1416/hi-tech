@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Tabs, Tab, ListGroup, Form, Button, Row, Col } from 'react-bootstrap'
+import { Tabs, Tab, ListGroup, Form, Button, Row, Col, Modal } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { review } from '../actions/reviewActions'
 
@@ -20,6 +20,7 @@ const WriteReview = ({ product, user }) => {
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(review(product.product, user.firstName, rating, comment));
+        window.location.reload(false);
         console.log(product.product)
     }
 
@@ -64,7 +65,7 @@ const WriteReview = ({ product, user }) => {
             />
             </Col>
         </Form.Group>
-        <Button variant="primary" onClick = {submitHandler}> Submit </Button>
+        <Button variant="primary" onClick = {submitHandler} type = "submit"> Submit </Button>
         </Form>
         
 
