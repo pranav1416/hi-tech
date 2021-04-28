@@ -17,15 +17,14 @@ const ProductScreen = (props) => {
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
-  
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(listProductDetails(props.match.params.id))
     return () => {}
   }, [dispatch, props.match])
 
-
-  console.log(props.match.params.id)
+  //console.log(props.match.params.id)
   //const product = products.products.find((x) => x._id === props.match.params.id)
   return (
     <>
@@ -48,7 +47,6 @@ const ProductScreen = (props) => {
                 <h1> Please Login</h1>
               )
             } */}
-            
           </Col>
           <Col>
             <ProductAdd {...props} product={product} />

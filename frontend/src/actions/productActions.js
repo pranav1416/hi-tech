@@ -44,7 +44,7 @@ export const listProductDetails = (id) => async (dispatch) => {
       payload: {
         product: data._id,
         name: data.name,
-        image: data.imageURLs,
+        image: data.imageURLs[0],
         price: data.prices.amountMin,
         countInStock: data.countInStock,
         weight: data.weight,
@@ -52,7 +52,7 @@ export const listProductDetails = (id) => async (dispatch) => {
         description: data.categories,
         productCode: data.upc,
         customQty: data.qty,
-        reviews: data.reviews
+        reviews: data.reviews,
       },
     })
   } catch (error) {
@@ -64,6 +64,4 @@ export const listProductDetails = (id) => async (dispatch) => {
           : error.message,
     })
   }
-
-  
 }
