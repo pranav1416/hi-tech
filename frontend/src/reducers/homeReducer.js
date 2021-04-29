@@ -59,7 +59,7 @@ export const BannerReducer = (
 }
   
 export const DropdownReducer = (
-    state = state = { products: [] },action) => {
+    state = state = { products:  {categories: [] } },action) => {
     switch (action.type) {
       case  DROPDOWN_REQUEST:
         return { loading: true, ...state }
