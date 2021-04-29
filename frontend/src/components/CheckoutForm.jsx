@@ -1,15 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import { Form, Col, Row } from "react-bootstrap";
-import { Radio, RadioGroup } from "react-radio-group";
+import { Form, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./Checkout.css";
 
 const CheckoutForm = ({ cartItems, price }) => {
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
+  const {userInfo } = userLogin;
 
   const [email, setEmail] = useState(userInfo.email);
   const [firstName, setFirstName] = useState(userInfo.firstName);

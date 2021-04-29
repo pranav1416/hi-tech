@@ -1,0 +1,30 @@
+.top_padding {
+    padding-top: 50px;
+}
+
+.order_histry_title {
+    text-align: center !important;
+    margin-bottom: 30px;
+}
+.order_history_card {
+    margin: 0.9em;
+    width: 900px;
+    margin-left: 7.0em;
+}
+
+.order_history_card_header {
+    background-color: #f0f0f0!important;
+    /*color: grey*/
+}
+
+.order_history_details {
+    text-align: right !important;
+}
+
+.order-summary_tr:last-child {
+    border-bottom: none;
+}
+
+.order_history_body {
+    padding: 0.0rem;
+}

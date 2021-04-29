@@ -42,7 +42,6 @@ const OrderReceipt = () => {
   const [orderMessage, setOrderMessage] = useState(null);
   const [orderTotalMessage, setOrderTotalMessage] = useState(null);
   const [orderDateMessage, setOrderDateMessage] = useState(null);
-  const [orderReceiptError, setOrderReceiptError] = useState(null);
   const [cartItems, setCartItems] = useState(null);
   const dispatch = useDispatch();
   const [price, setPrice] = useState(initPrice);
@@ -51,6 +50,7 @@ const OrderReceipt = () => {
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+  const [loaded, setLoaded] = useState(null);
 
   useEffect(() => {
     async function saveOrderHistory() {
@@ -72,6 +72,7 @@ const OrderReceipt = () => {
             "Error while saving saveOrderHistory " + JSON.stringify(error)
           );
         });
+      setLoaded(true);
 
       if (response.data.products) {
         var orderItems = response.data.products.map(function (item) {
@@ -106,13 +107,13 @@ const OrderReceipt = () => {
 
   return (
     <Container class="order_receipt_cotainer">
-      {orderReceipt == null ? (
+      {orderReceipt === null && loaded === true ? (
         <Message variant="danger">
           Error while saving the order. Contact Support team.
         </Message>
       ) : (
         <div>
-          <Row className="order_text">
+          <Row className="order_text col_center_block">
             <span className="order_text order_thank_you">
               Thanks for your order...
             </span>
@@ -124,9 +125,10 @@ const OrderReceipt = () => {
             </span> */}
           </Row>
 
-          <Row>
+          <Row className="summary_col_center_block">
             <Col>
-            <Table className="order_summary_teable">
+            <Table className="order_summary_table">
+              <div>
               <thead>
                 <tr>
                   <th>SUMMARY</th>
@@ -134,25 +136,28 @@ const OrderReceipt = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr class="no_padding no_padding">
+                <tr class="no_padding">
                   <td class="no_padding">{orderMessage}</td>
-                  <td class="no_padding">{userInfo.firstName} {userInfo.lastName}</td>
+                  <td class="no_padding center_col">{userInfo.firstName} {userInfo.lastName}</td>
                 </tr>
                 <tr>
-                  <td class="no_padding no_padding">{orderDateMessage}</td>
-                  <td class="no_padding">{shippingAddr}</td>
+                  <td class="no_padding">{orderDateMessage}</td>
+                  <td class="no_padding center_col">{shippingAddr}</td>
                 </tr>
                 <tr className="last_order_summary_table no_padding">
                   <td class="no_padding">{orderTotalMessage}</td>
-                  <td class="no_padding">{shippingAddr2}</td>
+                  <td class="no_padding center_col">{shippingAddr2}</td>
                 </tr>
               </tbody>
+              </div>
             </Table>
             </Col>
           </Row>
 
-          <Row>
-            <OrderSummary cartItems={cartItems} price={price} />
+          <Row className="col_center_block">
+            <div>
+              <OrderSummary cartItems={cartItems} price={price} />
+            </div>
           </Row>
         </div>
       )}

@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Container, Col, Row, } from "react-bootstrap";
 import '../components/Checkout.css';
 import '../components/OrderSummary.css';
+import '../components/OrderHistory.css';
 import CheckoutForm from '../components/CheckoutForm'
 import OrderSummary from '../components/OrderSummary'
 import Message from '../components/Message'
@@ -14,12 +15,10 @@ const sum = function(items){
     }, 0);
 };
 
-const getDiscount = function(subTotal) {
-    const min = 1;
-    const max = 10;
-    const rand = (min + Math.random() * (max - min)) /100;
-    console.log('random discount is ' + rand);
-    return subTotal * rand;
+const getDiscount = function(items) {
+    return items.reduce( function(a, b){
+        return a + b['discount'];
+    }, 0);
 }
   
 const Checkout = () => {
@@ -28,7 +27,7 @@ const Checkout = () => {
     console.log(cartItems);
     var subTotalV = sum(cartItems);
     var salesTax = subTotalV * 0.10;
-    var discountV = getDiscount(subTotalV);
+    var discountV = getDiscount(cartItems);
     var totalV = subTotalV + salesTax - discountV;
     
     const price = {

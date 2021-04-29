@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Table, Col, Row, Image, Container } from "react-bootstrap";
 import Message from "../components/Message";
@@ -43,13 +43,15 @@ const OrderSummary = ({ cartItems , price }) => {
                     </td>
                     
                     <td key="name">
-                      <Link to={`/product/${cartItem.product}`}>{cartItem.name}</Link>
+                      <div className="order_summary_link">
+                        <Link to={`/product/${cartItem.product}`}>{cartItem.name}</Link>
+                      </div>
                     </td>
                     <td key="quantity">{cartItem.qty}</td>
                     <td key="price">{formatter.format(cartItem.price)}</td>
                   </tr>
                 ))}
-
+    
                 <tr colSpan="2" className="order_price">
                   <td className="order_price"></td>
                   <td className="order_price">SubTotal</td>
