@@ -1,5 +1,6 @@
 import React from 'react'
 import { Carousel, Figure, Container, Row, Col, Image } from 'react-bootstrap'
+import "./ProductImage.css";
 
 const ProductImage = ({ product }) => {
   return (
@@ -8,47 +9,8 @@ const ProductImage = ({ product }) => {
     //   <Figure.Image width={400} height={420} src={product.image} />
     //   <Figure.Caption>{product.description}</Figure.Caption>
     // </Figure>
-
-    // <Carousel>
-    // {product.imageURLs?.map((images) => (
-    //     <Carousel.Item>
-    //         <img
-    //         className="d-block w-100"
-    //         src={images.image}
-    //         alt="Third slide"
-    //         />
-
-    //         <Carousel.Caption>
-    //         <h3>Third slide label</h3>
-    //         <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-    //         </Carousel.Caption>
-    //     </Carousel.Item>
-    // ))}
-    // </Carousel>
-
-    // <Figure>
-    //     <Figure.Image width={400} height={420} src={product.image} />
-    //     <Figure.Caption>{product.description}</Figure.Caption>
-    // </Figure>
-
-    // <Container>
-    //     <Row>
-    //         <Col xs={6} md={4}>
-    //         <Image 
-    //             src={product.image} rounded />
-    //         </Col>
-    //         <Col xs={6} md={4}>
-    //         <Image 
-    //             src={product.image1} roundedCircle />
-    //         </Col>
-    //         <Col xs={6} md={4}>
-    //         <Image 
-    //             src={product.image1} thumbnail />
-    //         </Col>
-    //     </Row>
-    // </Container>
             
-    <Carousel>
+    <Carousel className="top-content">
         <Carousel.Item>
             <img
             className="d-block w-100"
@@ -67,7 +29,22 @@ const ProductImage = ({ product }) => {
         <Carousel.Item>
             <img
             className="d-block w-100"
-            src={product.image1}
+            src={product.image2}
+            alt="Third slide"
+            />
+        </Carousel.Item>
+        <Carousel.Item>
+            <img
+            className="d-block w-100"
+            src={product.image3}
+            alt="Second slide"
+            />
+
+        </Carousel.Item>
+        <Carousel.Item>
+            <img
+            className="d-block w-100"
+            src={product.image4}
             alt="Third slide"
             />
         </Carousel.Item>
@@ -75,5 +52,6 @@ const ProductImage = ({ product }) => {
         
   )
 }
+
 
 export default ProductImage
