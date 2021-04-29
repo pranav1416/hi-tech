@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import Rating from './Rating'
 
 
+
 const ProductSale = ({product, match, history}) => {
   const [qty, setQty] = useState(1)
   function handleAddToCart() {
@@ -29,3 +30,13 @@ return (
 }
 
 export default ProductSale
+
+
+
+
+
+// {/* {posts.map((product, key) => (
+// <h2>{product.image}</h2>
+// ))} */}
+
+

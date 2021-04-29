@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Tabs, Tab, ListGroup, Form, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import WriteReview from './WriteReview'
+import Rating from './Rating'
 
 
 const ProductReview = ({ product }) => {
@@ -29,7 +31,9 @@ const ProductReview = ({ product }) => {
                         {product.reviews?.map((review) => (
                         <ListGroup.Item> 
                             {review.reviewName} 
-                            ({review.reviewRating} / 5): {review.reviewComment}
+                            <Rating value={review.reviewRating} /> 
+                            "{review.reviewComment}"
+                            {/* ({review.reviewRating} / 5): {review.reviewComment} */}
                         </ListGroup.Item>
                     ))}
                 </ListGroup>
@@ -43,7 +47,9 @@ const ProductReview = ({ product }) => {
                             <WriteReview product={product} user={userInfo} />
                             
                         ) : (
-                            <h2> Please Login </h2>
+                            <Link to={'/login'}>
+                                <h2> Please Login </h2>
+                            </Link>
                         )
                     }
                 </>
