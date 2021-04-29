@@ -15,14 +15,12 @@ const ProductImage = ({ product }) => {
             <img
             className="d-block w-100"
             src={product.image}
-            alt="First slide"
             />
         </Carousel.Item>
         <Carousel.Item>
             <img
             className="d-block w-100"
             src={product.image1}
-            alt="Second slide"
             />
 
         </Carousel.Item>
@@ -30,14 +28,12 @@ const ProductImage = ({ product }) => {
             <img
             className="d-block w-100"
             src={product.image2}
-            alt="Third slide"
             />
         </Carousel.Item>
         <Carousel.Item>
             <img
             className="d-block w-100"
             src={product.image3}
-            alt="Second slide"
             />
 
         </Carousel.Item>
@@ -45,7 +41,6 @@ const ProductImage = ({ product }) => {
             <img
             className="d-block w-100"
             src={product.image4}
-            alt="Third slide"
             />
         </Carousel.Item>
     </Carousel>
