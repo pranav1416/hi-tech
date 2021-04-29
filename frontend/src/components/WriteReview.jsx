@@ -39,17 +39,38 @@ const WriteReview = ({ product, user }) => {
         </Form.Group>
 
         <Form.Group as={Row} controlId="formPlaintextRating">
-            <Form.Label column sm="5">
-            Overall Rating (1-5)
+            <Form.Label column sm="10">
+            Overall Rating (How this product is working for you?)
             </Form.Label>
-            <Col sm="10">
+                <Col sm="10">
+                    {['radio'].map((type) => (
+                        <div key={`inline-${type}`} className="mb-3">
+                        <Form.Check inline label="1" name="group1" type={type} id={`inline-${type}-1`} 
+                            value={rating}
+                            onChange={(e) => { setRating('1');}}/>
+                        <Form.Check inline label="2" name="group2" type={type} id={`inline-${type}-2`} 
+                            value={rating}
+                            onChange={(e) => { setRating('2');}}/>
+                        <Form.Check inline label="3" name="group3" type={type} id={`inline-${type}-3`} 
+                            value={rating}
+                            onChange={(e) => { setRating('3');}}/>
+                        <Form.Check inline label="4" name="group4" type={type} id={`inline-${type}-4`} 
+                            value={rating}
+                            onChange={(e) => { setRating('4');}}/>
+                        <Form.Check inline label="5 stars" name="group5" type={type} id={`inline-${type}-5`} 
+                            value={rating}
+                            onChange={(e) => { setRating('5');}}/>
+                        </div>
+                     ))}
+                    </Col>
+            {/* <Col sm="10">
             <Form.Control 
                 type="rating" 
                 placeholder="How this product is working for you?" 
                 value={rating}
                 onChange={(e) => { setRating(e.target.value);}}
             />
-            </Col>
+            </Col> */}
         </Form.Group>
 
         <Form.Group as={Row} controlId="formPlaintextRating">
