@@ -68,14 +68,18 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route GET /api/users/profile
 // @access Private
 const getUserProfile = asyncHandler(async (req, res) => {
+  //console.log('Req in getUserProfile: ', req)
   const user = await User.findById(req.user._id)
+  //console.log('User in getUserProfile : ', user)
   if (user) {
+    //console.log('Res in getUserProfile : ', res)
     res.json({
       _id: user._id,
-      name: user.name,
+      name: user.firstName,
       email: user.email,
       isAdmin: user.isAdmin,
     })
+    //console.log('Here in getUserProfile')
   } else {
     res.status(404)
     throw new Error('User not found')
