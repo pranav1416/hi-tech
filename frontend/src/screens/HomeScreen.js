@@ -11,6 +11,8 @@ import ProductAdd from '../components/ProductAdd'
 import ProductsDisplayed from '../components/ProductsDisplayed'
 
 
+
+
 const HomeScreen = () => {
   // PRODUCT SCREEN MODULE : [TESTING]
   // Add to cart and quantity select
@@ -47,12 +49,28 @@ const HomeScreen = () => {
             </Col>
           ))}
         </Row>
-        </>
-      
-        
+        </> 
       )}
     </>
   )
 }
 
 export default HomeScreen
+
+
+
+
+
+
+  // const[posts, setPosts] = useState([])
+  // useEffect(() => {
+  //   axios 
+  //   .get("http://localhost:5001/products")
+  //   .then(res => setPosts(res.data))
+  //   .catch(error => console.log(error))
+
+  // })
+
+
+
+      // {/* <Route to= "/api/products" render = {() =>  <ProductSale posts = {posts} />} /> */}
