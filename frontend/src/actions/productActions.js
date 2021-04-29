@@ -45,6 +45,7 @@ export const listProductDetails = (id) => async (dispatch) => {
         product: data._id,
         name: data.name,
         image: data.imageURLs[0],
+        image1: data.imageURLs[1],
         price: data.prices.amountMin,
         countInStock: data.countInStock,
         weight: data.weight,

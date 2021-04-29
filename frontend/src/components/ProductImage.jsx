@@ -26,49 +26,52 @@ const ProductImage = ({ product }) => {
     // ))}
     // </Carousel>
 
-    <Figure>
-        <Figure.Image width={400} height={420} src={product.image} />
-        <Figure.Caption>{product.description}</Figure.Caption>
-    </Figure>
+    // <Figure>
+    //     <Figure.Image width={400} height={420} src={product.image} />
+    //     <Figure.Caption>{product.description}</Figure.Caption>
+    // </Figure>
 
     // <Container>
     //     <Row>
     //         <Col xs={6} md={4}>
-    //         <Image src={product.image[0]} rounded />
+    //         <Image 
+    //             src={product.image} rounded />
     //         </Col>
     //         <Col xs={6} md={4}>
-    //         <Image src={product.image[1]} roundedCircle />
+    //         <Image 
+    //             src={product.image1} roundedCircle />
     //         </Col>
     //         <Col xs={6} md={4}>
-    //         <Image src={product.image[2]} thumbnail />
+    //         <Image 
+    //             src={product.image1} thumbnail />
     //         </Col>
     //     </Row>
     // </Container>
             
-    // <Carousel>
-    //     <Carousel.Item>
-    //         <img
-    //         className="d-block w-100"
-    //         src={product.image[0]}
-    //         alt="First slide"
-    //         />
-    //     </Carousel.Item>
-    //     <Carousel.Item>
-    //         <img
-    //         className="d-block w-100"
-    //         src={product.image[1]}
-    //         alt="Second slide"
-    //         />
+    <Carousel>
+        <Carousel.Item>
+            <img
+            className="d-block w-100"
+            src={product.image}
+            alt="First slide"
+            />
+        </Carousel.Item>
+        <Carousel.Item>
+            <img
+            className="d-block w-100"
+            src={product.image1}
+            alt="Second slide"
+            />
 
-    //     </Carousel.Item>
-    //     <Carousel.Item>
-    //         <img
-    //         className="d-block w-100"
-    //         src={product.image[2]}
-    //         alt="Third slide"
-    //         />
-    //     </Carousel.Item>
-    // </Carousel>
+        </Carousel.Item>
+        <Carousel.Item>
+            <img
+            className="d-block w-100"
+            src={product.image1}
+            alt="Third slide"
+            />
+        </Carousel.Item>
+    </Carousel>
         
   )
 }
