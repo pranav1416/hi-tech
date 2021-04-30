@@ -13,9 +13,9 @@ const HttpProxyAgent = require("http-proxy-agent");
 
 const axiosDefaultConfig = {
   //baseURL: process.env.baseURL || "http://localhost:5001",
-  baseURL: process.env.baseURL,
-  proxy: false,
-  httpAgent: new HttpProxyAgent(process.env.baseURL),
+  //baseURL: process.env.baseURL,
+  //proxy: false,
+  //httpAgent: new HttpProxyAgent(process.env.baseURL),
   headers: {
     "Content-Type": "application/json;charset=UTF-8",
     "Access-Control-Allow-Origin": "*",
