@@ -9,28 +9,56 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import bodyParser from 'body-parser'
 import { createRequire } from 'module'
 import BrowserRoutes from './routes/browserRoutes.js'
+import cors from 'cors'
+import path from 'path'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
 
-const require = createRequire(import.meta.url)
-var cors = require('cors')
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+//const path = require('path')
+//var cors = require('cors')
+
+console.log('Hello world')
+
 dotenv.config()
 
 connectDB()
 const app = express()
-//app.use(bodyParser());
 app.use(cors())
 app.use(express.json())
-
-app.get('/', (req, res) => {
-  res.send('API is running!')
-})
 
 app.use('/api/products', productRoutes)
 app.use('/api/review', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/profile', profileRoutes)
 app.use('/api/orderHistory', orderHistoryRoutes)
-app.use(notFound)
-app.use(errorHandler)
+// app.use(notFound)
+// app.use(errorHandler)
+
+if (process.env.NODE_ENV === 'development') {
+  // app.use(express.static(path.join(__dirname, '../frontend', 'build')))
+
+  // app.get('/*', (req, res) => {
+  //   res.sendFile(path.join(__dirname, '../frontend', 'build', 'index.html'))
+  // })
+  app.get('/', (req, res) => {
+    console.log('Inside API is running')
+    res.send('API is running!')
+  })
+}
+
+//production mode
+console.log(process.env)
+if (process.env.NODE_ENV === 'production') {
+  console.log('RUNNING IN PROD ')
+  app.use(express.static(path.join(__dirname, '../frontend', 'build')))
+  //
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend', 'build', 'index.html'))
+  })
+}
 
 const PORT = process.env.PORT || 5001
 app.listen(

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button, Row, Col, Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -31,7 +31,10 @@ const ProfileScreen = ({ history }) => {
   const [editEmail, setEditEmail] = useState(true)
   const [editPassword, setEditPassword] = useState(true)
   const [editAddress, setEditAddress] = useState(true)
+  const [action, setAction] = useState('')
+
   const dispatch = useDispatch()
+
   const userDetails = useSelector((state) => state.userDetails)
   const { loading, error, user } = userDetails
 
@@ -40,14 +43,18 @@ const ProfileScreen = ({ history }) => {
 
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
   const { success } = userUpdateProfile
-  console.log(editName)
+  // console.log(editName)
   useEffect(() => {
     if (!userInfo) {
-      history.pushState('/login')
+      history.push('/login')
     } else {
       if (!user.firstName) {
         dispatch(getUserDetails('profile'))
       } else {
+        setEditName(true)
+        setEditPassword(true)
+        setEditEmail(true)
+        setEditAddress(true)
         setEmail(user.email)
         setFirstName(user.firstName)
         setLastName(user.lastName)
@@ -58,272 +65,277 @@ const ProfileScreen = ({ history }) => {
         setZipcode(user.address[0].zipcode)
       }
     }
-    console.log(editName)
+    //console.log(editName)
   }, [dispatch, history, userInfo, user])
 
-  const handleSubmit = (action) => (event) => {
-    event.preventDefault()
+  useEffect(() => {
+    dispatch(getUserDetails('profile'))
+  }, [success])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(action)
     switch (action) {
       case 'name':
         dispatch(
           updateUserProfile({ _id: user._id, action, firstName, lastName })
         )
+        break
       case 'password':
         if (password !== confirmPassword) {
           setMessage('Passwords do not match')
         } else {
           dispatch(updateUserProfile({ _id: user._id, action, password }))
         }
+        break
       case 'email':
         dispatch(updateUserProfile({ _id: user._id, action, email }))
       case 'address':
         setAddress({ addr1, addr2, city, stateName, zipcode })
         dispatch(updateUserProfile({ _id: user._id, action, address }))
+        break
+      default:
+        throw new Error('Invalid Action')
     }
-    // if (password !== confirmPassword) {
-    //   setMessage('Passwords do not match')
-    // } else {
-    //   setAddress({ addr1, addr2, city, stateName, zipcode })
-    //   dispatch(
-    //     updateUserProfile({
-    //       _id: user._id,
-    //       firstName,
-    //       lastName,
-    //       email,
-    //       password,
-    //       address,
-    //     })
-    //   )
-    // }
   }
 
-  const handleName = () => {
+  const handleName = (e) => {
+    e.preventDefault()
+    setAction('name')
     setEditName(!editName)
   }
-  const handleEmail = () => {
+  const handleEmail = (e) => {
+    e.preventDefault()
+    setAction('email')
     setEditEmail(!editEmail)
   }
-  const handlePassword = () => {
+  const handlePassword = (e) => {
+    e.preventDefault()
+    setAction('password')
     setEditPassword(!editPassword)
   }
-  const handleAddress = () => {
+  const handleAddress = (e) => {
+    e.preventDefault()
+    setAction('address')
     setEditAddress(!editAddress)
   }
   return (
     <>
-      <h2>User Profile</h2>
-      {message && <Message variant='danger'>{message}</Message>}
-      {error && <Message variant='danger'>{error}</Message>}
-      {success && <Message variant='sucess'>Profile Updated!</Message>}
-      {loading && <Loader />}
-      <Form onSubmit={handleSubmit('name')}>
-        <Row>
-          <Col md={3}>
-            <Form.Group controlId='formBasicFirstName'>
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                type='firstname'
-                placeholder='Enter First Name'
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                required
-                disabled={editName}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={3}>
-            <Form.Group controlId='formBasicLastName'>
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type='lastname'
-                placeholder='Last Name'
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                required
-                disabled={editName}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={1}>
-            <Button variant='light' className='my-4' onClick={handleName}>
-              <i class='far fa-edit'></i>
-            </Button>
-          </Col>
-          {!editName && (
-            <Col md={2}>
-              <Button
-                type='submit'
-                variant='dark'
-                className='my-4'
-                disabled={editName}
-              >
-                Update Name
+      <Container>
+        <h2>User Profile</h2>
+        {message && <Message variant='danger'>{message}</Message>}
+        {error && <Message variant='danger'>{error}</Message>}
+        {success && <Message variant='light'>Profile Updated!</Message>}
+        {loading && <Loader />}
+        <Form onSubmit={handleSubmit}>
+          <Row>
+            <Col md={3}>
+              <Form.Group controlId='formBasicFirstName'>
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
+                  type='firstname'
+                  placeholder='Enter First Name'
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  required
+                  disabled={editName}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={3}>
+              <Form.Group controlId='formBasicLastName'>
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type='lastname'
+                  placeholder='Last Name'
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  required
+                  disabled={editName}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={1}>
+              <Button variant='light' className='my-4' onClick={handleName}>
+                <i class='far fa-edit'></i>
               </Button>
             </Col>
-          )}
-        </Row>
-      </Form>
+            {!editName && (
+              <Col md={2}>
+                <Button
+                  type='submit'
+                  variant='dark'
+                  className='my-4'
+                  disabled={editName}
+                >
+                  Update Name
+                </Button>
+              </Col>
+            )}
+          </Row>
+        </Form>
 
-      <Form onSubmit={handleSubmit('email')}>
-        <Row>
-          <Col md={3}>
-            <Form.Group controlId='formBasicEmail'>
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type='email'
-                placeholder='Email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                disabled={editEmail}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={1}>
-            <Button variant='light' className='my-4' onClick={handleEmail}>
-              <i class='far fa-edit'></i>
-            </Button>
-          </Col>
-          {!editEmail && (
-            <Col md={2}>
-              <Button
-                type='submit'
-                variant='dark'
-                className='my-4'
-                disabled={editEmail}
-              >
-                Update Email
+        <Form onSubmit={handleSubmit}>
+          <Row>
+            <Col md={3}>
+              <Form.Group controlId='formBasicEmail'>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type='email'
+                  placeholder='Email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  disabled={editEmail}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={1}>
+              <Button variant='light' className='my-4' onClick={handleEmail}>
+                <i class='far fa-edit'></i>
               </Button>
             </Col>
-          )}
-        </Row>
-      </Form>
-      <Form onSubmit={handleSubmit('password')}>
-        <Row>
-          <Col md={3}>
-            <Form.Group controlId='formBasicPassword'>
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type='password'
-                placeholder='Password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={editPassword}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={3}>
-            <Form.Group controlId='formBasicPassword'>
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type='password'
-                placeholder='Confirm Password'
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                disabled={editPassword}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={1}>
-            <Button variant='light' className='my-4' onClick={handlePassword}>
-              <i class='far fa-edit'></i>
-            </Button>
-          </Col>
-          {!editPassword && (
-            <Col md={2}>
-              <Button
-                type='submit'
-                variant='dark'
-                className='my-4'
-                disabled={editPassword}
-              >
-                Update Password
+            {!editEmail && (
+              <Col md={2}>
+                <Button
+                  type='submit'
+                  variant='dark'
+                  className='my-4'
+                  disabled={editEmail}
+                >
+                  Update Email
+                </Button>
+              </Col>
+            )}
+          </Row>
+        </Form>
+        <Form onSubmit={handleSubmit}>
+          <Row>
+            <Col md={3}>
+              <Form.Group controlId='formBasicPassword'>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type='password'
+                  placeholder='Password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={editPassword}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={3}>
+              <Form.Group controlId='formBasicPassword'>
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  type='password'
+                  placeholder='Confirm Password'
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  disabled={editPassword}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={1}>
+              <Button variant='light' className='my-4' onClick={handlePassword}>
+                <i class='far fa-edit'></i>
               </Button>
             </Col>
-          )}
-        </Row>
-      </Form>
+            {!editPassword && (
+              <Col md={2}>
+                <Button
+                  type='submit'
+                  variant='dark'
+                  className='my-4'
+                  disabled={editPassword}
+                >
+                  Update Password
+                </Button>
+              </Col>
+            )}
+          </Row>
+        </Form>
 
-      <Row>
-        <Col>
-          <Form.Label>Delivery Address</Form.Label>
-        </Col>
-      </Row>
-      <Form onSubmit={handleSubmit('address')}>
         <Row>
-          <Col md={3}>
-            <Form.Group controlId='addressLine'>
-              <Form.Control
-                placeholder='Address Line 1'
-                value={addr1}
-                onChange={(e) => setAddr1(e.target.value)}
-                required
-                disabled={editAddress}
-              />
-            </Form.Group>
+          <Col>
+            <Form.Label>Delivery Address</Form.Label>
           </Col>
-          <Col md={1}>
-            <Button variant='light' onClick={handleAddress}>
-              <i class='far fa-edit'></i>
-            </Button>
-          </Col>
-          {!editAddress && (
-            <Col md={2}>
-              <Button type='submit' variant='dark' disabled={editAddress}>
-                Update Address
+        </Row>
+        <Form onSubmit={handleSubmit}>
+          <Row>
+            <Col md={3}>
+              <Form.Group controlId='addressLine'>
+                <Form.Control
+                  placeholder='Address Line 1'
+                  value={addr1}
+                  onChange={(e) => setAddr1(e.target.value)}
+                  required
+                  disabled={editAddress}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={1}>
+              <Button variant='light' onClick={handleAddress}>
+                <i class='far fa-edit'></i>
               </Button>
             </Col>
-          )}
-        </Row>
-        <Row>
-          <Col md={3}>
-            <Form.Group controlId='addresssss'>
-              <Form.Control
-                placeholder='Address Line 2'
-                value={addr2}
-                onChange={(e) => setAddr2(e.target.value)}
-                disabled={editAddress}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={2}>
-            <Form.Group controlId='cityField'>
-              <Form.Control
-                placeholder='City'
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                required
-                disabled={editAddress}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={1}>
-            <Form.Group controlId='stateField'>
-              <Form.Control
-                placeholder='State'
-                value={stateName}
-                onChange={(e) => setStateName(e.target.value)}
-                required
-                disabled={editAddress}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={1}>
-            <Form.Group controlId='zipcodeField'>
-              <Form.Control
-                type='number'
-                placeholder='Zipcode'
-                value={zipcode}
-                onChange={(e) => setZipcode(e.target.value)}
-                required
-                disabled={editAddress}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-      </Form>
+            {!editAddress && (
+              <Col md={2}>
+                <Button type='submit' variant='dark' disabled={editAddress}>
+                  Update Address
+                </Button>
+              </Col>
+            )}
+          </Row>
+          <Row>
+            <Col md={3}>
+              <Form.Group controlId='addresssss'>
+                <Form.Control
+                  placeholder='Address Line 2'
+                  value={addr2}
+                  onChange={(e) => setAddr2(e.target.value)}
+                  disabled={editAddress}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={2}>
+              <Form.Group controlId='cityField'>
+                <Form.Control
+                  placeholder='City'
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  required
+                  disabled={editAddress}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={1}>
+              <Form.Group controlId='stateField'>
+                <Form.Control
+                  placeholder='State'
+                  value={stateName}
+                  onChange={(e) => setStateName(e.target.value)}
+                  required
+                  disabled={editAddress}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={1}>
+              <Form.Group controlId='zipcodeField'>
+                <Form.Control
+                  type='number'
+                  placeholder='Zipcode'
+                  value={zipcode}
+                  onChange={(e) => setZipcode(e.target.value)}
+                  required
+                  disabled={editAddress}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+        </Form>
+      </Container>
     </>
   )
 }

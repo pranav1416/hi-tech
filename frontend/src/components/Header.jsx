@@ -1,4 +1,5 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 import {
   Navbar,
   Nav,
@@ -8,6 +9,7 @@ import {
   Container,
   NavDropdown,
 } from 'react-bootstrap'
+import SearchBox from './SearchBox'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
@@ -39,6 +41,7 @@ const Header = () => {
           {/* Replace all href with LinkContainer as done for the Navbar.Brand, the linkcontainer will allow
                          react-bootstrap elements to be linked to the router path.
                      */}
+          <Route render={({ history }) => <SearchBox history={history} />} />
           <LinkContainer to='/cart'>
             <Nav.Link>
               <i className='fas fa-shopping-cart'></i> Cart
@@ -64,10 +67,6 @@ const Header = () => {
             </LinkContainer>
           )}
         </Nav>
-        <Form inline>
-          <FormControl type='text' placeholder='Search' className='mr-sm-2' />
-          <Button variant='outline-info'>Search</Button>
-        </Form>
       </Navbar>
     </header>
   )

@@ -99,70 +99,90 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     let updatedUser
     switch (req.body.action) {
       case 'name':
-        updatedUser = await User.updateOne(
-          { _id: user._id },
-          {
-            $set: {
-              firstName: req.body.firstName,
-              lastName: req.body.lastName,
-            },
-          }
-        )
-        res.json({
-          _id: updatedUser._id,
-          firstName: updatedUser.firstName,
-          email: updatedUser.email,
-          isAdmin: updatedUser.isAdmin,
-          token: generateToken(updatedUser._id),
-        })
+        if (req.body.firstName && req.body.lastName) {
+          updatedUser = await User.updateOne(
+            { _id: user._id },
+            {
+              $set: {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+              },
+            }
+          )
+          res.json({
+            _id: updatedUser._id,
+            firstName: updatedUser.firstName,
+            email: updatedUser.email,
+            isAdmin: updatedUser.isAdmin,
+            token: generateToken(updatedUser._id),
+          })
+        } else {
+          throw new Error('Update Failed')
+        }
+        break
       case 'email':
-        updatedUser = await User.updateOne(
-          { _id: user._id },
-          {
-            $set: {
-              email: req.body.email,
-            },
-          }
-        )
-        res.json({
-          _id: updatedUser._id,
-          firstName: updatedUser.firstName,
-          email: updatedUser.email,
-          isAdmin: updatedUser.isAdmin,
-          token: generateToken(updatedUser._id),
-        })
+        if (req.body.email) {
+          updatedUser = await User.updateOne(
+            { _id: user._id },
+            {
+              $set: {
+                email: req.body.email,
+              },
+            }
+          )
+          res.json({
+            _id: updatedUser._id,
+            firstName: updatedUser.firstName,
+            email: updatedUser.email,
+            isAdmin: updatedUser.isAdmin,
+            token: generateToken(updatedUser._id),
+          })
+        } else {
+          throw new Error('Update Failed')
+        }
+        break
       case 'password':
-        updatedUser = await User.updateOne(
-          { _id: user._id },
-          {
-            $set: {
-              password: req.body.password,
-            },
-          }
-        )
-        res.json({
-          _id: updatedUser._id,
-          firstName: updatedUser.firstName,
-          email: updatedUser.email,
-          isAdmin: updatedUser.isAdmin,
-          token: generateToken(updatedUser._id),
-        })
+        if (req.body.password) {
+          updatedUser = await User.updateOne(
+            { _id: user._id },
+            {
+              $set: {
+                password: req.body.password,
+              },
+            }
+          )
+          res.json({
+            _id: updatedUser._id,
+            firstName: updatedUser.firstName,
+            email: updatedUser.email,
+            isAdmin: updatedUser.isAdmin,
+            token: generateToken(updatedUser._id),
+          })
+        } else {
+          throw new Error('Update Failed')
+        }
+        break
       case 'address':
-        updatedUser = await User.updateOne(
-          { _id: user._id },
-          {
-            $set: {
-              'address.0': req.body.address,
-            },
-          }
-        )
-        res.json({
-          _id: updatedUser._id,
-          firstName: updatedUser.firstName,
-          email: updatedUser.email,
-          isAdmin: updatedUser.isAdmin,
-          token: generateToken(updatedUser._id),
-        })
+        if (req.body.address) {
+          updatedUser = await User.updateOne(
+            { _id: user._id },
+            {
+              $set: {
+                'address.0': req.body.address,
+              },
+            }
+          )
+          res.json({
+            _id: updatedUser._id,
+            firstName: updatedUser.firstName,
+            email: updatedUser.email,
+            isAdmin: updatedUser.isAdmin,
+            token: generateToken(updatedUser._id),
+          })
+        } else {
+          throw new Error('Update Failed')
+        }
+        break
       default:
         throw new Error('Invalid Update profile action')
     }

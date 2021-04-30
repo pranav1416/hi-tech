@@ -14,6 +14,7 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
 } from '../constants/userConstants'
+import bcrypt from 'bcryptjs'
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -146,6 +147,10 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     }
+    const salt = await bcrypt.genSalt(10)
+    const pass = await bcrypt.hash(user.password, salt)
+    console.log(pass)
+    user.password = pass
     const { data } = await axios.put(`/api/profile`, user, config)
 
     dispatch({
