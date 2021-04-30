@@ -8,6 +8,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js"
 import bodyParser from 'body-parser';
 import { createRequire } from 'module';
 import BrowserRoutes from './routes/browserRoutes.js'
+import homeRoutes from './routes/homeRoutes.js'
 
 const require = createRequire(import.meta.url);
 var cors = require('cors')
@@ -27,6 +28,8 @@ app.use('/api/products', productRoutes)
 app.use('/api/review', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orderHistory', orderHistoryRoutes)
+app.use('/api/browser', BrowserRoutes)
+app.use('/api/products', homeRoutes )
 app.use(notFound)
 app.use(errorHandler)
 
