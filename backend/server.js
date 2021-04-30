@@ -8,9 +8,9 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js"
 import bodyParser from 'body-parser';
 import { createRequire } from 'module';
 import BrowserRoutes from './routes/browserRoutes.js'
-const path = require('path');
 
 const require = createRequire(import.meta.url);
+const path = require('path');
 var cors = require('cors')
 dotenv.config()
 
