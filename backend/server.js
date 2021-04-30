@@ -18,12 +18,6 @@ const __dirname = dirname(__filename);
 const require = createRequire(import.meta.url);
 const path = require('path');
 var cors = require('cors');
-const fs = require("fs");
-if (fs.existsSync(path.join(__dirname,'/../frontend','build','index.html'))) {
-    console.log('Server has file ' + path.join(__dirname,'/../frontend','build','index.html'));
-} else {
-  console.log('Server dont have file');
-}
 
 console.log('Hello world');
 
@@ -36,6 +30,7 @@ app.use(cors());
 app.use(express.json())
 
 // app.get('/', (req, res) => {
+//   console.log('Inside API is running');
 //   res.send('API is running!')
 // })
 
@@ -43,17 +38,25 @@ app.use('/api/products', productRoutes)
 app.use('/api/review', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orderHistory', orderHistoryRoutes)
-app.use(notFound)
-app.use(errorHandler)
+// app.use(notFound)
+// app.use(errorHandler)
 
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static(path.join(__dirname, '../frontend/build')));
+// app.use(express.static(path.join(__dirname,'frontend','build')));
+//   //
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname,'frontend','build','index.html'));
+// })
 
-  app.get('*',(req,res)=>{
-    // res.sendFile(path.join(__dirname,'/../frontend','build','index.html'));
-    res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-  });
+//production mode
+if(process.env.NODE_ENV === 'production') {
+  console.log('RUNNING IN PROD ');
+  app.use(express.static(path.join(__dirname,'../frontend','build')));
+  //
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname,'../frontend','build','index.html'));
+  })
 }
+
 
 
 const PORT = process.env.PORT || 5001
