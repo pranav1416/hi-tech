@@ -13,8 +13,11 @@ const protect = asyncHandler(async (req, res, next) => {
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
       req.user = await User.findById(decoded.id)
-      console.log('Protected complete')
-      next()
+      console.log('REQ METHOD: ', req.method)
+      console.log('REQ Body = ', req.body)
+      //console.log('Protected complete')
+      return next()
+      //console.log('after next')
     } catch (error) {
       console.log(error)
       res.status(401)
@@ -26,6 +29,7 @@ const protect = asyncHandler(async (req, res, next) => {
     res.status(401)
     throw new Error('Not authorized, no token')
   }
+  //console.log('Here again')
   next()
 })
 

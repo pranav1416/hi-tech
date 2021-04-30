@@ -1,50 +1,52 @@
 {
-  "name": "hi-tech",
-  "version": "1.0.0",
-  "description": "Hi-tech Electronic store (CPSC 462 Project)",
-  "main": "server.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node backend/server",
-    "server": "nodemon backend/server ",
-    "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "cd frontend && npm install && npm run build"
+    "name": "hi-tech",
+    "version": "1.0.0",
+    "description": "Hi-tech Electronic store (CPSC 462 Project)",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node backend/server",
+      "server": "nodemon backend/server",
+      "client": "npm start --prefix frontend",
+      "dev": "concurrently \"npm run server\" \"npm run client\"",
+      "heroku-postbuild": "cd frontend && npm install && npm run build"
     },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pranav1416/hi-tech.git"
-  },
-  "author": "Pranav, Keira, Nour and Shraddha",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/pranav1416/hi-tech/issues"
-  },
-  "homepage": "https://github.com/pranav1416/hi-tech#readme",
-  "dependencies": {
-    "axios": "^0.21.1",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "bootstrap": "^4.6.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-async-handler": "^1.1.4",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.3",
-    "react": "^17.0.2",
-    "react-bootstrap": "^1.5.2",
-    "react-dom": "^17.0.2",
-    "react-paginate": "^7.1.2",
-    "react-router-bootstrap": "^0.25.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "concurrently": "^6.0.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "nodemon": "^2.0.7"
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/pranav1416/hi-tech.git"
+    },
+    "author": "Pranav, Keira, Nour and Shraddha",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/pranav1416/hi-tech/issues"
+    },
+    "homepage": "https://github.com/pranav1416/hi-tech#readme",
+    "dependencies": {
+      "axios": "^0.21.1",
+      "bcryptjs": "^2.4.3",
+      "body-parser": "^1.19.0",
+      "bootstrap": "^4.6.0",
+      "cors": "^2.8.5",
+      "dotenv": "^8.2.0",
+      "express": "^4.17.1",
+      "express-async-handler": "^1.1.4",
+      "jsonwebtoken": "^8.5.1",
+      "mongoose": "^5.12.3",
+      "react": "^17.0.2",
+      "react-bootstrap": "^1.5.2",
+      "react-dom": "^17.0.2",
+      "react-paginate": "^7.1.2",
+      "react-router-bootstrap": "^0.25.0",
+      "react-router-dom": "^5.2.0",
+      "react-scripts": "^4.0.3",
+      "require_optional": "^1.0.1",
+      "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+      "concurrently": "^6.0.0",
+      "eslint-plugin-react-hooks": "^4.2.0",
+      "nodemon": "^2.0.7"
+    }
   }
-}
+  
