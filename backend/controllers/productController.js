@@ -14,7 +14,9 @@ const getProducts = asyncHandler(async (req, res) => {
 // @route GET /api/products
 // @access Public
 const getProductById = asyncHandler(async (req, res) => {
-  const product = await Product.findOne({ _id: req.params.id }).populate('reviews')
+  const product = await Product.findOne({ _id: req.params.id }).populate(
+    'reviews'
+  )
   if (product) {
     res.send(product)
   } else {

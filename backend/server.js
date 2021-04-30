@@ -3,8 +3,9 @@ import dotenv from 'dotenv'
 import connectDB from './config/db.js'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
-import profileRoutes from './routes/profileRoutes.js'
 import orderHistoryRoutes from './routes/orderHistoryRoutes.js'
+import profileRoutes from './routes/profileRoutes.js'
+import browsingRoutes from './routes/browsingRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import bodyParser from 'body-parser'
 import { createRequire } from 'module'
@@ -17,9 +18,6 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-//const path = require('path')
-//var cors = require('cors')
-
 console.log('Hello world')
 
 dotenv.config()
@@ -30,6 +28,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/api/products', productRoutes)
+app.use('/api/search', browsingRoutes)
 app.use('/api/review', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/profile', profileRoutes)

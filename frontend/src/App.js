@@ -14,6 +14,7 @@ import OrderHistory from './screens/OrderHistoryScreen'
 
 import OrderReceipt from './components/OrderReceipt'
 import BannerAdd from './components/BannerAdd'
+import BrowsingScreen from './screens/BrowsingScreen'
 
 const App = () => {
   return (
@@ -30,7 +31,7 @@ const App = () => {
         <Route path='/orderReceipt' component={OrderReceipt} />
         <Route path='/orderHistory' component={OrderHistory} />
         <main>
-          <Route path='/search/:keyword' component={HomeScreen} />
+          <Route path='/search/:keyword' component={BrowsingScreen} />
           <Route path='/' exact={true} component={HomeScreen} />
         </main>
         <Footer />

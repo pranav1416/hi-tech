@@ -6,17 +6,13 @@ import { listProducts } from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import BannerAdd from '../components/BannerAdd'
-import  ProductSale from '../components/ProductSale'
+import ProductSale from '../components/ProductSale'
 import ProductAdd from '../components/ProductAdd'
 import ProductsDisplayed from '../components/ProductsDisplayed'
-
-
-
 
 const HomeScreen = () => {
   // PRODUCT SCREEN MODULE : [TESTING]
   // Add to cart and quantity select
-  const [qty, setQty] = useState(0)
 
   const dispatch = useDispatch()
 
@@ -31,25 +27,25 @@ const HomeScreen = () => {
     <>
       <h1>Welcome to Hi-Tech Store</h1>
       <>
-      <BannerAdd />
-      <ProductSale />
+        <BannerAdd />
+        <ProductSale />
       </>
-      <ProductsDisplayed/>
-      
+      <ProductsDisplayed />
+
       {loading ? (
-      <Loader /> 
+        <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
-        <Row style = {{paddingTop: '450px'}}>
-          {products.map((product) => (
-            <Col sm={12} md={6} lg={4} xl={3}>
-              <Product style= {{paddingTop: '10px'}} product={product} />
-            </Col>
-          ))}
-        </Row>
-        </> 
+          <Row style={{ paddingTop: '450px' }}>
+            {products.map((product) => (
+              <Col sm={12} md={6} lg={4} xl={3}>
+                <Product style={{ paddingTop: '10px' }} product={product} />
+              </Col>
+            ))}
+          </Row>
+        </>
       )}
     </>
   )
@@ -57,20 +53,13 @@ const HomeScreen = () => {
 
 export default HomeScreen
 
+// const[posts, setPosts] = useState([])
+// useEffect(() => {
+//   axios
+//   .get("http://localhost:5001/products")
+//   .then(res => setPosts(res.data))
+//   .catch(error => console.log(error))
 
+// })
 
-
-
-
-  // const[posts, setPosts] = useState([])
-  // useEffect(() => {
-  //   axios 
-  //   .get("http://localhost:5001/products")
-  //   .then(res => setPosts(res.data))
-  //   .catch(error => console.log(error))
-
-  // })
-
-
-
-      // {/* <Route to= "/api/products" render = {() =>  <ProductSale posts = {posts} />} /> */}
+// {/* <Route to= "/api/products" render = {() =>  <ProductSale posts = {posts} />} /> */}
