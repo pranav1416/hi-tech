@@ -9,9 +9,24 @@ import bodyParser from 'body-parser';
 import { createRequire } from 'module';
 import BrowserRoutes from './routes/browserRoutes.js'
 
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+
 const require = createRequire(import.meta.url);
 const path = require('path');
-var cors = require('cors')
+var cors = require('cors');
+const fs = require("fs");
+if (fs.existsSync(path.join(__dirname,'/../frontend','build','index.html'))) {
+    console.log('Server has file ' + path.join(__dirname,'/../frontend','build','index.html'));
+} else {
+  console.log('Server dont have file');
+}
+
+console.log('Hello world');
+
 dotenv.config()
 
 connectDB()
@@ -32,10 +47,11 @@ app.use(notFound)
 app.use(errorHandler)
 
 if(process.env.NODE_ENV === 'production'){
-  app.use(express.static('../frontend/build'));
+  app.use(express.static(path_join(__dirname, '../frontend/build')));
 }
 app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname,'/../frontend','build','index.html'));
+    // res.sendFile(path.join(__dirname,'/../frontend','build','index.html'));
+    res.sendFile(path_join(__dirname, '../frontend/build/index.html'));
 });
 
 const PORT = process.env.PORT || 5001
