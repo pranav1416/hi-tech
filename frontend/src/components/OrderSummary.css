@@ -95,3 +95,7 @@ tbody > tr:last-child > td {
   border: 0px;
 }
 
+#order_summary_link a:link { color: #4f8862; }
+#order_summary_link a:visited { color: #078531; }
+#order_summary_link a:hover { color: #078531; }
+#order_summary_link a:active { color: #018e30; }

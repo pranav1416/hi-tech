@@ -10,6 +10,7 @@ import Checkout from './screens/Checkout'
 import Browser from './screens/Browser'
 import CartScreen from './screens/CartScreen'
 import ProfileScreen from './screens/ProfileScreen'
+import OrderHistory from './screens/OrderHistoryScreen'
 
 import OrderReceipt from './components/OrderReceipt'
 import BannerAdd from './components/BannerAdd'
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='/checkout' component={Checkout} />
         <Route path='/browser' component={Browser} />
         <Route path='/orderReceipt' component={OrderReceipt} />
+        <Route path='/orderHistory' component={OrderHistory} />
         <main>
           <Route path='/' exact={true} component={HomeScreen} />
         </main>

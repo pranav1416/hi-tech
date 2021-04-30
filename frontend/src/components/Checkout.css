@@ -17,8 +17,11 @@ body {
 
   .btn-custom{
 
-    background-color:green;
-    color:white;
+    /* background-color: #f0c14b;
+    color:white; */
+    background: #f0c14b;
+    border-color: #a88734 #9c7e31 #846a29;
+    color: #111;
     width: 50%;
     margin-top: 25px;
     margin-left:200px;

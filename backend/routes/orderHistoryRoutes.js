@@ -12,7 +12,15 @@ const router = express.Router()
 router.get('/', asyncHandler(async(req,res)=>{
     console.log('GET /api/orderHistory');
     //const users = await userModel.find({})
-    res.send(200);
+    // Access the provided 'userID' and 'limt' query parameters
+    var userIDP = req.query.userID;
+    let limitP = parseInt(req.query.limit);
+    
+    const queryP = { userID: userIDP};
+    const sortP = { orderDate: -1};
+    //const orderHistories = await orderHistoryModel.find(queryP).sort(sortP).limit(limitP);
+    const orderHistories = await orderHistoryModel.find(queryP).sort(sortP).limit(limitP);
+    res.send(orderHistories)
 }))
 
 // @desc Fetch single product
