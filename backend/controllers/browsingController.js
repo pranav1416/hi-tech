@@ -13,7 +13,7 @@ const getSearchProducts = asyncHandler(async (req, res) => {
     : {}
   console.log(keyword)
 
-  const products = await Product.find({ ...keyword }) //.populate('reviews')
+  const products = await Product.find({ ...keyword }).populate('reviews')
 
   res.send(products)
 })
