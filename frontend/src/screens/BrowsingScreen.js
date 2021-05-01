@@ -10,13 +10,13 @@ const BrowsingScreen = ({ match }) => {
   const dispatch = useDispatch()
 
   const keyword = match.params.keyword
+  const searchProducts = useSelector((state) => state.searchProducts)
+  const { loading, products, error } = searchProducts
 
   console.log(keyword)
   useEffect(() => {
     dispatch(listSearchProducts(keyword))
-  }, [dispatch, keyword])
-  const searchProducts = useSelector((state) => state.searchProducts)
-  const { loading, products, error } = searchProducts
+  }, [dispatch, keyword, searchProducts])
 
   return (
     <>
@@ -28,7 +28,7 @@ const BrowsingScreen = ({ match }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
-          <Row style={{ paddingTop: '450px' }}>
+          <Row>
             {products.map((product) => (
               <Col sm={12} md={6} lg={4} xl={3}>
                 <Product style={{ paddingTop: '10px' }} product={product} />

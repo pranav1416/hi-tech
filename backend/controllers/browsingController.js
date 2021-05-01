@@ -5,6 +5,7 @@ import Product from '../models/productModel.js'
 // @route GET /api/products
 // @access Public
 const getSearchProducts = asyncHandler(async (req, res) => {
+  console.log('Search Req: ', req)
   const keyword = req.query.keyword
     ? {
         name: { $regex: req.query.keyword, $options: 'i' },

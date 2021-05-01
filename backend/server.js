@@ -10,6 +10,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import bodyParser from 'body-parser'
 import { createRequire } from 'module'
 import BrowserRoutes from './routes/browserRoutes.js'
+import homeRoutes from './routes/homeRoutes.js'
 import cors from 'cors'
 import path from 'path'
 import { dirname } from 'path'
@@ -27,12 +28,15 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.use('/api/products', productRoutes)
+//app.use('/api/products', productRoutes)
 app.use('/api/search', browsingRoutes)
 app.use('/api/review', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/profile', profileRoutes)
 app.use('/api/orderHistory', orderHistoryRoutes)
+//app.use('/api/browser', BrowserRoutes)
+app.use('/api/products', homeRoutes)
+
 // app.use(notFound)
 // app.use(errorHandler)
 
@@ -46,6 +50,8 @@ if (process.env.NODE_ENV === 'development') {
     console.log('Inside API is running')
     res.send('API is running!')
   })
+  app.use(notFound)
+  app.use(errorHandler)
 }
 
 //production mode
