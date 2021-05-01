@@ -6,14 +6,6 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 
-function useToggle(initialValue = false) {
-  const [value, setValue] = React.useState(initialValue)
-  const toggle = React.useCallback(() => {
-    setValue((v) => !v)
-  }, [])
-  return [value, toggle]
-}
-
 const ProfileScreen = ({ history }) => {
   const [email, setEmail] = useState('')
   const [firstName, setFirstName] = useState('')
@@ -43,7 +35,7 @@ const ProfileScreen = ({ history }) => {
 
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
   const { success } = userUpdateProfile
-  // console.log(editName)
+
   useEffect(() => {
     if (!userInfo) {
       history.push('/login')
@@ -74,9 +66,10 @@ const ProfileScreen = ({ history }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(action)
+    console.log('ProfileScreen Action :', action)
     switch (action) {
       case 'name':
+        console.log('Name Change- ', action, firstName, lastName)
         dispatch(
           updateUserProfile({ _id: user._id, action, firstName, lastName })
         )
@@ -90,6 +83,7 @@ const ProfileScreen = ({ history }) => {
         break
       case 'email':
         dispatch(updateUserProfile({ _id: user._id, action, email }))
+        break
       case 'address':
         setAddress({ addr1, addr2, city, stateName, zipcode })
         dispatch(updateUserProfile({ _id: user._id, action, address }))

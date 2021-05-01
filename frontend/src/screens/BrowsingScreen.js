@@ -13,10 +13,10 @@ const BrowsingScreen = ({ match }) => {
   const searchProducts = useSelector((state) => state.searchProducts)
   const { loading, products, error } = searchProducts
 
-  console.log(keyword)
   useEffect(() => {
+    console.log(keyword)
     dispatch(listSearchProducts(keyword))
-  }, [dispatch, keyword, searchProducts])
+  }, [dispatch, keyword])
 
   return (
     <>

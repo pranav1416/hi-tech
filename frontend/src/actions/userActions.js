@@ -147,11 +147,14 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     }
-    const salt = await bcrypt.genSalt(10)
-    const pass = await bcrypt.hash(user.password, salt)
-    console.log(pass)
-    user.password = pass
-    const { data } = await axios.put(`/api/profile`, user, config)
+    console.log('UserActions User: ', user)
+    if (user.action === 'password') {
+      const salt = await bcrypt.genSalt(10)
+      const pass = await bcrypt.hash(user.password, salt)
+      console.log(pass)
+      user.password = pass
+    }
+    const { data } = await axios.put('/api/profile', user, config)
 
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
