@@ -63,7 +63,15 @@ const Product = ({ product }) => {
           <Rating value={avg} text={product.reviews.length} />
         </Card.Text>
 
-        <Card.Text as='h3'>${product.prices.amountMin}</Card.Text>
+        <Card.Text as='h3'>
+          <>
+          {product.prices.amountMax > product.prices.amountMin ? ( 
+            <p><del>$ {product.prices.amountMax} </del>  $ {product.prices.amountMin}</p>
+          ) : (
+            <p>$ {product.prices.amountMin}</p>
+          )}
+          </>
+        </Card.Text>
       </Card.Body>
     </Card>
   )

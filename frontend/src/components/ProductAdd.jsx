@@ -18,8 +18,8 @@ const ProductAdd = ({ history, product, match }) => {
 
   return (
     <Jumbotron>
-      {product.isSale ? ( 
-        <h1><del>$ {product.originPrice} </del> $ {product.price}</h1>
+      {product.originPrice > product.price ? ( 
+        <h1><del>$ {product.originPrice} </del>  $ {product.price}</h1>
       ) : (
         <h1>$ {product.price} </h1>
       )}
