@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Jumbotron, Form, Button, Col, Badge } from 'react-bootstrap'
+import Rating from './Rating'
 
 const ProductAdd = ({ history, product, match }) => {
   //let history = useHistory()
@@ -10,9 +11,19 @@ const ProductAdd = ({ history, product, match }) => {
   function handleAddToCart() {
     history.push(`/cart/${match.params.id}?qty=${qty}`)
   }
+
+  const avg =
+    product.reviews.reduce((sum, review) => sum + review.reviewRating, 0) /
+    product.reviews.length
+
   return (
     <Jumbotron>
-      <h1>$ {product.price} </h1>
+      {product.isSale ? ( 
+        <h1><del>$ {product.originPrice} </del> $ {product.price}</h1>
+      ) : (
+        <h1>$ {product.price} </h1>
+      )}
+      <h5><Rating value={avg} text={product.reviews.length} /></h5>
       <p>Availibity: {product.countInStock} in stock!</p>
       <p>
         {product.countInStock > 0 ? (
