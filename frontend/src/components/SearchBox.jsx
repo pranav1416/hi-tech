@@ -7,7 +7,7 @@ const SearchBox = ({ history }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (keyword.trim()) {
-      history.push(`/search/${keyword}`)
+      history.push(`/search/${keyword}/page/1`)
     } else {
       history.push('/')
     }

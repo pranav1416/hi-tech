@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, FormControl, Form } from 'react-bootstrap'
 import Product from '../components/Product'
-import { listProducts } from '../actions/productActions'
+import { fetchProducts } from '../actions/homeActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import BannerAdd from '../components/BannerAdd'
 import ProductSale from '../components/ProductSale'
 import ProductAdd from '../components/ProductAdd'
 import ProductsDisplayed from '../components/ProductsDisplayed'
+import ProductCarousel from '../components/ProductCarousel'
 
 const HomeScreen = () => {
   // PRODUCT SCREEN MODULE : [TESTING]
@@ -16,11 +17,11 @@ const HomeScreen = () => {
 
   const dispatch = useDispatch()
 
-  const productList = useSelector((state) => state.productList)
-  const { loading, products, error } = productList
+  const productFetch = useSelector((state) => state.productFetch)
+  const { loading, products, error } = productFetch
 
   useEffect(() => {
-    dispatch(listProducts())
+    dispatch(fetchProducts())
   }, [dispatch])
 
   return (
@@ -33,6 +34,9 @@ const HomeScreen = () => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
+          <Row>
+            <ProductCarousel />
+          </Row>
           <Row>
             {products.map((product) => (
               <Col sm={12} md={6} lg={4} xl={3}>

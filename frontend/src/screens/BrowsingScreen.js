@@ -5,18 +5,20 @@ import Product from '../components/Product'
 import { listSearchProducts } from '../actions/browsingActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import Paginate from '../components/Paginate'
 
 const BrowsingScreen = ({ match }) => {
   const dispatch = useDispatch()
 
   const keyword = match.params.keyword
+  const pageNumber = match.params.pageNumber || 1
   const searchProducts = useSelector((state) => state.searchProducts)
-  const { loading, products, error } = searchProducts
+  const { loading, products, error, pages, page } = searchProducts
 
   useEffect(() => {
     console.log(keyword)
-    dispatch(listSearchProducts(keyword))
-  }, [dispatch, keyword])
+    dispatch(listSearchProducts(keyword, pageNumber))
+  }, [dispatch, keyword, pageNumber])
 
   return (
     <>
@@ -35,6 +37,11 @@ const BrowsingScreen = ({ match }) => {
               </Col>
             ))}
           </Row>
+          <Paginate
+            pages={pages}
+            page={page}
+            keyword={keyword ? keyword : ''}
+          />
         </>
       )}
     </>

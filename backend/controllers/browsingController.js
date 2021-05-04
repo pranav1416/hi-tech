@@ -5,17 +5,22 @@ import Product from '../models/productModel.js'
 // @route GET /api/products
 // @access Public
 const getSearchProducts = asyncHandler(async (req, res) => {
-  console.log('Search Req: ', req)
+  const pageSize = 8
+  const page = Number(req.query.pageNumber) || 1
   const keyword = req.query.keyword
     ? {
         name: { $regex: req.query.keyword, $options: 'i' },
       }
     : {}
-  console.log(keyword)
 
-  const products = await Product.find({ ...keyword }).populate('reviews')
+  const count = await Product.countDocuments({ ...keyword })
 
-  res.send(products)
+  const products = await Product.find({ ...keyword })
+    .populate('reviews')
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
+
+  res.send({ products, page, pages: Math.ceil(count / pageSize) })
 })
 
 export { getSearchProducts }

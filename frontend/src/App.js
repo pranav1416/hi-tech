@@ -7,13 +7,11 @@ import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
 import LoginScreen from './screens/LoginScreen'
 import Checkout from './screens/Checkout'
-import Browser from './screens/Browser'
 import CartScreen from './screens/CartScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import OrderHistory from './screens/OrderHistoryScreen'
 
 import OrderReceipt from './components/OrderReceipt'
-import BannerAdd from './components/BannerAdd'
 import BrowsingScreen from './screens/BrowsingScreen'
 
 const App = () => {
@@ -27,11 +25,14 @@ const App = () => {
         <Route path='/profile' component={ProfileScreen} />
         <Route path='/cart/:id?' component={CartScreen} />
         <Route path='/checkout' component={Checkout} />
-        <Route path='/browser' component={Browser} />
         <Route path='/orderReceipt' component={OrderReceipt} />
         <Route path='/orderHistory' component={OrderHistory} />
         <main>
-          <Route path='/search/:keyword' component={BrowsingScreen} />
+          {/* <Route path='/search/:keyword' component={BrowsingScreen} /> */}
+          <Route
+            path='/search/:keyword/page/:pageNumber'
+            component={BrowsingScreen}
+          />
           <Route path='/' exact={true} component={HomeScreen} />
         </main>
         <Footer />
