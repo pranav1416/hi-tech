@@ -12,6 +12,13 @@ const ProductAdd = ({ history, product, match }) => {
     history.push(`/cart/${match.params.id}?qty=${qty}`)
   }
 
+  function float2int (value) {
+    return value | 0;
+  } 
+
+  const intCountInStock =
+    float2int(product.countInStock)
+
   const avg =
     product.reviews.reduce((sum, review) => sum + review.reviewRating, 0) /
     product.reviews.length
@@ -24,9 +31,9 @@ const ProductAdd = ({ history, product, match }) => {
         <h1>$ {product.price} </h1>
       )}
       <h5><Rating value={avg} text={product.reviews.length} /></h5>
-      <p>Availibity: {product.countInStock} in stock!</p>
+      <p>Availibity: {intCountInStock} in stock!</p>
       <p>
-        {product.countInStock > 0 ? (
+        {intCountInStock > 0 ? (
           <>
             <Form>
               <Form.Group controlId='exampleForm.SelectCustom'>
@@ -38,7 +45,7 @@ const ProductAdd = ({ history, product, match }) => {
                     setQty(e.target.value)
                   }}
                 >
-                  {[...Array(product.countInStock).keys()].map((x) => (
+                  {[...Array(intCountInStock).keys()].map((x) => (
                     <option key={x + 1} value={x + 1}>
                       {' '}
                       {x + 1}{' '}

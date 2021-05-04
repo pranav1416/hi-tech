@@ -21,6 +21,13 @@ const CartScreen = ({ match, location, history }) => {
   const qty = queryParams['qty'] ? Number(queryParams['qty']) : 1
   const userID = queryParams['userID'] ? queryParams['userID'] : 1
 
+  function float2int (value) {
+    return value | 0;
+  } 
+
+  // const intCountInStock =
+  //   float2int(product.countInStock)
+
   const dispatch = useDispatch()
 
   const cart = useSelector((state) => state.cart)
@@ -72,7 +79,7 @@ const CartScreen = ({ match, location, history }) => {
                             )
                           }}
                         >
-                          {[...Array(item.countInStock).keys()].map((x) => (
+                          {[...Array(float2int(item.countInStock)).keys()].map((x) => (
                             <option key={x + 1} value={x + 1}>
                               {' '}
                               {x + 1}{' '}
