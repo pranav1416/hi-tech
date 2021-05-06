@@ -1,14 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import { Form, Col } from "react-bootstrap";
+import { Form, Col, Row } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./Checkout.css";
 
 const CheckoutForm = ({ cartItems, price }) => {
   const userLogin = useSelector((state) => state.userLogin);
-  const {userInfo } = userLogin;
+  const { userInfo } = userLogin;
 
   const [email, setEmail] = useState(userInfo.email);
   const [firstName, setFirstName] = useState(userInfo.firstName);
@@ -18,6 +18,7 @@ const CheckoutForm = ({ cartItems, price }) => {
   const [city, setCity] = useState(userInfo.address[0].city);
   const [stateV, setStateV] = useState(userInfo.address[0].state);
   const [zipcode, setZipCode] = useState(userInfo.address[0].zipcode);
+  const [paymentOption, setPaymentOption] = useState("");
   const history = useHistory();
 
   const [validated, setValidated] = useState(false);
@@ -50,7 +51,7 @@ const CheckoutForm = ({ cartItems, price }) => {
           method: "Cash On Delivery",
         },
       };
-      
+
       const products = cartItems.map(function (item) {
         return {
           productID: item.product,
@@ -61,7 +62,6 @@ const CheckoutForm = ({ cartItems, price }) => {
         };
       });
       payload.products = products;
-      console.log("Payload after adding product is " + JSON.stringify(payload));
       history.push({
         pathname: "/orderReceipt",
         state: {
@@ -71,6 +71,12 @@ const CheckoutForm = ({ cartItems, price }) => {
     }
     setValidated(true);
   };
+
+  const updateCategory = (e) => {
+    if(e.target.checked) {
+       setPaymentOption(e.target.value)
+    }
+  }
 
   return (
     <>
@@ -244,10 +250,93 @@ const CheckoutForm = ({ cartItems, price }) => {
         <h4 class="mystyle-checkout">Payment</h4>
 
         <Form.Group>
-          <Form.Label>
-            <input type="radio" value="option1" />
-            Cash On Delivery
-          </Form.Label>
+          <Form.Row>
+            <Col md={3}>
+            <div>
+              <input
+                type="radio"
+                value="cod"
+                name="payment_method"
+                checked={paymentOption == "cod"}
+                required="required"
+                onChange={updateCategory}
+              />
+              Cash On Delivery
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="payment_method"
+                value="card"
+                checked={paymentOption == "card"}
+                required
+                onChange={updateCategory}
+              />
+              Credit Card
+            </div>
+            </Col>
+            {paymentOption == "" || paymentOption == "cod"  ? (
+              <div></div>
+            ) : (
+              <Col> 
+                <Row>
+                  <br/>
+                </Row>
+                <Row>
+                  <br/>
+                </Row>
+                <Row>
+                  <br/>
+                </Row>
+                <Row>
+                  <Form.Label>Credit Card</Form.Label>
+                  <Form.Control type="email" placeholder="Enter Credit Card" />
+                </Row>
+                <Row>
+                  <Col className="expriation_date expr_margin_top">
+                      <Form.Label>Expiration Date</Form.Label>
+                      <Form.Control
+                        type="text"
+                        as="select"
+                        defaultValue="Month"
+                      >
+                        <option value="january">January</option>
+                        <option value="february">February</option>
+                        <option value="march">March</option>
+                        <option value="april">April</option>
+                        <option value="may">May</option>
+                        <option value="june">June</option>
+                        <option value="july">July</option>
+                        <option value="august">August</option>
+                        <option value="september">September</option>
+                        <option value="october">October</option>
+                        <option value="november">November</option>
+                        <option value="december">December</option>
+                      </Form.Control>
+                  </Col>
+                  <Col className="expr_margin_top">
+                  <Form.Label>Year</Form.Label>
+                      <Form.Control
+                        type="text"
+                        as="select"
+                        defaultValue="Month"
+                      >
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2024">2025</option>
+                        <option value="2024">2026</option>
+                      </Form.Control>
+                  </Col>
+                  <Col className="expr_margin_top expriation_cvv">
+                    <Form.Label>CVV</Form.Label>
+                    <Form.Control type="text" />
+                  </Col>
+                </Row>
+              </Col>
+            )}
+          </Form.Row>
         </Form.Group>
 
         <Button variant="custom" type="submit" className="btn-custom">
