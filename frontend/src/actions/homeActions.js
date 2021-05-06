@@ -15,6 +15,9 @@ import {
   PRODUCT_TOP_REQUEST,
   PRODUCT_TOP_SUCCESS,
   PRODUCT_TOP_FAIL,
+  PRODUCT_ALL_TOP_REQUEST,
+  PRODUCT_ALL_TOP_SUCCESS,
+  PRODUCT_ALL_TOP_FAIL,
 } from '../constants/homeConstants.js'
 
 export const fetchProducts = () => async (dispatch) => {
@@ -46,7 +49,7 @@ export const listTopProducts = () => async (dispatch) => {
       type: PRODUCT_TOP_REQUEST,
     })
 
-    const { data } = await axios.get('/api/products/top')
+    const { data } = await axios.get('/api/home/top')
     dispatch({
       type: PRODUCT_TOP_SUCCESS,
       payload: data,
@@ -54,6 +57,28 @@ export const listTopProducts = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_TOP_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const listAllTopProducts = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: PRODUCT_ALL_TOP_REQUEST,
+    })
+
+    const { data } = await axios.get('/api/home/toprated')
+    dispatch({
+      type: PRODUCT_ALL_TOP_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_ALL_TOP_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

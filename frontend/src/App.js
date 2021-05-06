@@ -27,14 +27,12 @@ const App = () => {
         <Route path='/checkout' component={Checkout} />
         <Route path='/orderReceipt' component={OrderReceipt} />
         <Route path='/orderHistory' component={OrderHistory} />
-        <main>
-          {/* <Route path='/search/:keyword' component={BrowsingScreen} /> */}
-          <Route
-            path='/search/:keyword/page/:pageNumber'
-            component={BrowsingScreen}
-          />
-          <Route path='/' exact={true} component={HomeScreen} />
-        </main>
+        {/* <Route path='/search/:keyword' component={BrowsingScreen} /> */}
+        <Route
+          path='/search/:keyword/page/:pageNumber'
+          component={BrowsingScreen}
+        />
+        <Route path='/' exact={true} component={HomeScreen} />
         <Footer />
       </>
     </BrowserRouter>

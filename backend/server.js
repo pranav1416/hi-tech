@@ -7,9 +7,6 @@ import orderHistoryRoutes from './routes/orderHistoryRoutes.js'
 import profileRoutes from './routes/profileRoutes.js'
 import browsingRoutes from './routes/browsingRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
-import bodyParser from 'body-parser'
-import { createRequire } from 'module'
-import BrowserRoutes from './routes/browserRoutes.js'
 import homeRoutes from './routes/homeRoutes.js'
 import cors from 'cors'
 import path from 'path'
@@ -18,8 +15,6 @@ import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-
-console.log('Hello world')
 
 dotenv.config()
 

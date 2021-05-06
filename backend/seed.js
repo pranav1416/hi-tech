@@ -3,30 +3,49 @@ db = db.getSiblingDB('hitech')
 print(db.getCollectionNames())
 
 var products = db.products
-var categ = [
-  'Audio',
-  'Computers',
-  'TV',
-  'Mobile',
-  'Cameras & Camcorders',
-  'Car Electronics',
-]
-var x = 0
-// For updating primary Categories of database
+// var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest
+// For checking broken images
 products.find({}).forEach((doc) => {
-  var catg = doc.categories.reverse()
-  var flag = categ.forEach((cat) => {
-    if (catg.includes(cat)) {
-      db.products.findAndModify({
-        query: { _id: doc._id },
-        update: { $set: { primaryCategories: cat } },
-        upsert: false,
-      })
-      return true
+  //var images = doc.imageURls
+  var invalidUrls = []
+  doc.imageURLs.forEach((imgUrl) => {
+    var request = new XMLHttpRequest()
+    request.open('GET', imgUrl, true)
+    request.send()
+    request.onload = function () {
+      status = request.status
+      if (request.status !== 200) {
+        invalidUrls.push(imgUrl)
+      }
     }
-    print(x + 1, ' : ', flag, '\n')
+    print(invalidUrls)
   })
 })
+
+// var categ = [
+//   'Audio',
+//   'Computers',
+//   'TV',
+//   'Mobile',
+//   'Cameras & Camcorders',
+//   'Car Electronics',
+// ]
+// var x = 0
+// For updating primary Categories of database
+// products.find({}).forEach((doc) => {
+//   var catg = doc.categories.reverse()
+//   var flag = categ.forEach((cat) => {
+//     if (catg.includes(cat)) {
+//       db.products.findAndModify({
+//         query: { _id: doc._id },
+//         update: { $set: { primaryCategories: cat } },
+//         upsert: false,
+//       })
+//       return true
+//     }
+//     print(x + 1, ' : ', flag, '\n')
+//   })
+// })
 
 // db.products.findAndModify({
 //   query: { upc: ids },

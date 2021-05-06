@@ -22,8 +22,6 @@ const BrowsingScreen = ({ match }) => {
 
   return (
     <>
-      <h1>Welcome to Hi-Tech Store</h1>
-
       {loading ? (
         <Loader />
       ) : error ? (

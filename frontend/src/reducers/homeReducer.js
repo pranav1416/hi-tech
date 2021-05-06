@@ -1,19 +1,13 @@
 import {
-  PRODUCT_SALE_REQUEST,
-  PRODUCT_SALE_SUCCESS,
-  PRODUCT_SALE_FAIL,
-  BANNER_ADD_REQUEST,
-  BANNER_ADD_SUCCESS,
-  BANNER_ADD_FAIL,
-  DROPDOWN_REQUEST,
-  DROPDOWN_SUCCESS,
-  DROPDOWN_FAIL,
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_FAIL,
   PRODUCT_TOP_FAIL,
   PRODUCT_TOP_SUCCESS,
   PRODUCT_TOP_REQUEST,
+  PRODUCT_ALL_TOP_REQUEST,
+  PRODUCT_ALL_TOP_SUCCESS,
+  PRODUCT_ALL_TOP_FAIL,
 } from '../constants/homeConstants.js'
 
 export const productFetchReducer = (state = { products: [] }, action) => {
@@ -29,13 +23,32 @@ export const productFetchReducer = (state = { products: [] }, action) => {
   }
 }
 
-export const productTopRatedReducer = (state = { products: [] }, action) => {
+export const productTopRatedReducer = (
+  state = { productTopThree: [] },
+  action
+) => {
   switch (action.type) {
     case PRODUCT_TOP_REQUEST:
-      return { loading: true, products: [] }
+      return { loading: true, productTopThree: [] }
     case PRODUCT_TOP_SUCCESS:
-      return { loading: false, products: action.payload }
+      return { loading: false, productTopThree: action.payload }
     case PRODUCT_TOP_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const productAllTopRatedReducer = (
+  state = { productTopEight: [] },
+  action
+) => {
+  switch (action.type) {
+    case PRODUCT_ALL_TOP_REQUEST:
+      return { loading: true, productTopEight: [] }
+    case PRODUCT_ALL_TOP_SUCCESS:
+      return { loading: false, productTopEight: action.payload }
+    case PRODUCT_ALL_TOP_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state

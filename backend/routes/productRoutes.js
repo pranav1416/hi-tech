@@ -4,14 +4,12 @@ const router = express.Router()
 import {
   getProductById,
   getProducts,
-  getTopProducts,
 } from '../controllers/productController.js'
 import Review from '../models/reviewModel.js'
 import Product from '../models/productModel.js'
 
 router.route('/').get(getProducts)
-router.get('/top', getTopProducts)
-
+// router.get('/editdb', editProducts)
 router.route('/:id').get(getProductById)
 
 router.post(

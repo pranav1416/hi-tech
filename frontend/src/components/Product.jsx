@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Card } from 'react-bootstrap'
+import { Card, Text } from 'react-bootstrap'
 import Rating from './Rating'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { review } from '../actions/reviewActions'
@@ -38,24 +38,35 @@ const Product = ({ product }) => {
     product.reviews.length
 
   //console.log(product)
-  console.log(product.reviews.rating)
+  // console.log(product.reviews.rating)
 
   //const productImages = product.imageURLs.split(',')
   // console.log(productImages)
   return (
-    <Card className='my-3 p-3 rounded'>
+    <Card className='my-2 rounded' style={{ width: '13rem', height: '18rem' }}>
       <Link to={`/product/${product._id}`}>
         <Card.Img
           src={product.imageURLs[0]}
           variant='top'
-          style={{ width: '200px', height: '200px' }}
+          style={{
+            paddingTop: '0.5rem',
+            paddingLeft: '0.5rem',
+            width: '12.5rem',
+            height: '11rem',
+          }}
         />
       </Link>
 
-      <Card.Body>
+      <Card.Body
+        style={{ paddingTop: '0.5rem', paddingLeft: '0.75rem', width: '100%' }}
+      >
         <Link to={`/product/${product._id}`}>
-          <Card.Title as='div'>
-            <strong>{product.name}</strong>
+          <Card.Title as='div' style={{ width: '100%', height: '2rem' }}>
+            <strong>
+              {product.name.length > 30
+                ? product.name.slice(0, 30) + '...'
+                : product.name}
+            </strong>
           </Card.Title>
         </Link>
 
@@ -63,7 +74,22 @@ const Product = ({ product }) => {
           <Rating value={avg} text={product.reviews.length} />
         </Card.Text>
 
-        <Card.Text as='h3'>${product.prices.amountMin}</Card.Text>
+        <Card.Text as='h3'>
+          <>
+            {product.prices.amountMax > product.prices.amountMin ? (
+              <>
+                <p>
+                  <del>
+                    <small>${product.prices.amountMax}</small>
+                  </del>{' '}
+                  ${product.prices.amountMin}
+                </p>
+              </>
+            ) : (
+              <p>${product.prices.amountMin}</p>
+            )}
+          </>
+        </Card.Text>
       </Card.Body>
     </Card>
   )

@@ -1,56 +1,75 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, FormControl, Form } from 'react-bootstrap'
-import Product from '../components/Product'
-import { fetchProducts } from '../actions/homeActions'
+import { Row } from 'react-bootstrap'
+import { fetchProducts, listAllTopProducts } from '../actions/homeActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import BannerAdd from '../components/BannerAdd'
-import ProductSale from '../components/ProductSale'
-import ProductAdd from '../components/ProductAdd'
-import ProductsDisplayed from '../components/ProductsDisplayed'
 import ProductCarousel from '../components/ProductCarousel'
+import HomeMenu from '../components/HomeMenu'
 
 const HomeScreen = () => {
   // PRODUCT SCREEN MODULE : [TESTING]
   // Add to cart and quantity select
 
+  const [specialProd, setSpecialProduct] = useState({})
+  const [avg, setAvg] = useState(0)
+
   const dispatch = useDispatch()
 
   const productFetch = useSelector((state) => state.productFetch)
-  const { loading, products, error } = productFetch
-
+  const { loading, error, products } = productFetch
   useEffect(() => {
     dispatch(fetchProducts())
+    dispatch(listAllTopProducts())
   }, [dispatch])
 
+  const getSaleProducts = (products) => {
+    const saleProducts = products.filter(
+      (product) =>
+        product.prices.isSale === true &&
+        product.prices.amountMax > product.prices.amountMin
+    )
+    return saleProducts.slice(0, 8)
+  }
+  const getSpecialProduct = (products) => {
+    const saleProducts = products.filter(
+      (product) =>
+        product.prices.isSale === true &&
+        product.prices.amountMax > product.prices.amountMin
+    )
+    console.log(saleProducts.length)
+    let specialProduct = {}
+    if (saleProducts.length) {
+      specialProduct = saleProducts.reduce(function (prev, current) {
+        return prev.prices.amountMax - prev.prices.amountMin >
+          current.prices.amountMax - current.prices.amountMin
+          ? prev
+          : current
+      })
+    }
+    console.log(specialProduct)
+    const average =
+      specialProduct.reviews.reduce(
+        (sum, review) => sum + review.reviewRating,
+        0
+      ) / specialProduct.reviews.length
+    setAvg(average)
+    setSpecialProduct(specialProduct)
+    return specialProduct
+  }
   return (
     <>
-      <h1>Welcome to Hi-Tech Store</h1>
-
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
-          <Row>
+          <Row style={{ paddingTop: '0.5rem' }}>
             <ProductCarousel />
           </Row>
           <Row>
-            {products.map((product) => (
-              <Col sm={12} md={6} lg={4} xl={3}>
-                {/* {product.prices.isSale ? (
-                  <ProductSale
-                    style={{ paddingTop: '10px' }}
-                    product={product}
-                  />
-                ) : (
-                  <Product style={{ paddingTop: '10px' }} product={product} />
-                )} */}
-                <Product style={{ paddingTop: '10px' }} product={product} />
-              </Col>
-            ))}
+            <HomeMenu saleProducts={getSaleProducts(products)} />
           </Row>
         </>
       )}
@@ -59,73 +78,3 @@ const HomeScreen = () => {
 }
 
 export default HomeScreen
-
-// import React, { useState, useEffect } from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { Row, Col, FormControl, Form } from 'react-bootstrap'
-// import Product from '../components/Product'
-// import { listProducts } from '../actions/productActions'
-// import Loader from '../components/Loader'
-// import Message from '../components/Message'
-// import BannerAdd from '../components/BannerAdd'
-// import ProductSale from '../components/ProductSale'
-// import ProductAdd from '../components/ProductAdd'
-// import ProductsDisplayed from '../components/ProductsDisplayed'
-
-// const HomeScreen = () => {
-//   // PRODUCT SCREEN MODULE : [TESTING]
-//   // Add to cart and quantity select
-
-//   const dispatch = useDispatch()
-
-//   const productList = useSelector((state) => state.productList)
-//   const { loading, products, error } = productList
-
-//   useEffect(() => {
-//     dispatch(listProducts())
-//   }, [dispatch])
-
-//   return (
-//     <>
-//       <h1>Welcome to Hi-Tech Store</h1>
-//       <BannerAdd />
-//       <ProductSale />
-//       <ProductsDisplayed />
-//       <BannerAdd />
-
-//       <ProductsDisplayed />
-
-//       {loading ? (
-//         <Loader />
-//       ) : error ? (
-//         <Message variant='danger'>{error}</Message>
-//       ) : (
-//         <>
-//           <Row style={{ paddingTop: '450px' }}>
-//             {products.map((product) => (
-//               <Col sm={12} md={6} lg={4} xl={3}>
-//                 <Product style={{ paddingTop: '10px' }} product={product} />
-//               </Col>
-//             ))}
-//           </Row>
-//           <Row style={{ paddingTop: '450px' }}>
-//             {products.map((product) => (
-//               <Col sm={12} md={6} lg={4} xl={3}>
-//                 {product.prices.isSale ? (
-//                   <ProductSale
-//                     style={{ paddingTop: '10px' }}
-//                     product={product}
-//                   />
-//                 ) : (
-//                   <Product style={{ paddingTop: '10px' }} product={product} />
-//                 )}
-//               </Col>
-//             ))}
-//           </Row>
-//         </>
-//       )}
-//     </>
-//   )
-// }
-
-// export default HomeScreen

@@ -15,6 +15,7 @@ import {
 } from './reducers/userReducer'
 import { searchProductsReducer } from './reducers/browsingReducer'
 import {
+  productAllTopRatedReducer,
   productFetchReducer,
   productTopRatedReducer,
 } from './reducers/homeReducer'
@@ -30,6 +31,7 @@ const reducer = combineReducers({
   userUpdateProfile: userUpdateProfileReducer,
   searchProducts: searchProductsReducer,
   productTopRated: productTopRatedReducer,
+  productAllTopRated: productAllTopRatedReducer,
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')

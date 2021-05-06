@@ -29,21 +29,23 @@ const Header = () => {
         variant='primary'
         expand='lg'
         collapseOnSelect
-        style={{ marginTop: '-50px' }}
+        fixed='top'
       >
         <LinkContainer to='/'>
           <Navbar.Brand>Hi-Tech</Navbar.Brand>
         </LinkContainer>
-        <Nav className='mr-auto'>
+        <Nav className='container-fluid'>
           {/* <i> This tag is used to get font-awesome icons which I have imported as CDN in index.html
                         We can use this to give icons for links in the navbar like cart, login etc
                      */}
           {/* Replace all href with LinkContainer as done for the Navbar.Brand, the linkcontainer will allow
                          react-bootstrap elements to be linked to the router path.
                      */}
-          <Route render={({ history }) => <SearchBox history={history} />} />
+          <div className='ml-auto'>
+            <Route render={({ history }) => <SearchBox history={history} />} />
+          </div>
           <LinkContainer to='/cart'>
-            <Nav.Link>
+            <Nav.Link className='ml-auto'>
               <i className='fas fa-shopping-cart'></i> Cart
             </Nav.Link>
           </LinkContainer>
