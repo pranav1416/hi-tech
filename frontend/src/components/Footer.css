@@ -1,0 +1,26 @@
+.news {
+    background-color:hsl(212, 13%, 28%);
+    color:rgb(115, 214, 123);
+    font-family:poppins;
+}
+
+.news p {
+    margin:0;
+    color:white;
+}
+
+.fab {
+    font-size: 2.5rem;
+    cursor: pointer;
+    padding-right: 5px;
+    color:white;
+}
+
+.pb-3 ::before {
+    content:'';
+    position:absolute;
+    left:0;
+    bottom: -10px;
+    background-color: #e91e63;
+    height: 2px;
+}

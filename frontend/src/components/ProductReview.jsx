@@ -31,7 +31,7 @@ const ProductReview = ({ product }) => {
                         {product.reviews?.map((review) => (
                         <ListGroup.Item> 
                             {review.reviewName} 
-                            <Rating value={review.reviewRating} /> 
+                            <Rating value={review.reviewRating} text={-1}/> 
                             "{review.reviewComment}"
                             {/* ({review.reviewRating} / 5): {review.reviewComment} */}
                         </ListGroup.Item>
