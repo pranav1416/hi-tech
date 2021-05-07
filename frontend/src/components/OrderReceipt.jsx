@@ -47,7 +47,7 @@ const OrderReceipt = () => {
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
-  const [loaded, setLoaded] = useState(null);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     async function saveOrderHistory() {
@@ -105,9 +105,7 @@ const OrderReceipt = () => {
   return (
     <Container class="order_receipt_cotainer">
       {orderReceipt === null && loaded === true ? (
-        <Message variant="danger">
-          Error while saving the order. Contact Support team.
-        </Message>
+        <div></div>
       ) : (
         <div>
           <Row className="order_text col_center_block">

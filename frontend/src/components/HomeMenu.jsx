@@ -201,7 +201,7 @@ const HomeMenu = ({ saleProducts }) => {
 
   return (
     <Row style={{ paddingTop: '0.5rem' }}>
-      <Col sm={3} md={3} xl={3}>
+      <Col sm={3} md={3} xl={3} style={{ paddingLeft: '2rem' }}>
         <Row>
           <Col>
             <Dropdown>

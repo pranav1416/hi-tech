@@ -46,7 +46,7 @@ const SpecialProduct = ({ specialProd }) => {
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <Card className='my-5 p-1 rounded' style={{ width: '100%' }}>
+        <Card className='my-5 p-1 rounded' style={{ width: '18rem' }}>
           <Card.Header className='mx-auto my-auto'>
             <h2>Special Offer!!</h2>
           </Card.Header>
@@ -54,7 +54,7 @@ const SpecialProduct = ({ specialProd }) => {
             <Card.Img
               src={specialProd.imageURLs[0]}
               variant='top'
-              style={{ paddingLeft: '1rem', width: '18rem', height: '200px' }}
+              style={{ paddingLeft: '0rem', width: '16rem', height: '200px' }}
             />
           </Link>
 

@@ -29,7 +29,7 @@ body {
 
   .mystyle-checkout{
     color: black;
-    padding-bottom: 25px;
+    padding-bottom: 15px;
     padding-top: 15px;
     font-family: Arial;
     text-align: left;
@@ -43,4 +43,16 @@ body {
   }
   .checkoutForm{
     margin: auto;
+  }
+
+  .expriation_date {
+    padding-left: 0px !important;
+  }
+
+  .expr_margin_top {
+    margin-top: 20px;
+  }
+
+  .expriation_cvv {
+    padding-right: 0px !important;
   }

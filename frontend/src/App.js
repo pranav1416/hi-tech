@@ -20,19 +20,27 @@ const App = () => {
       <>
         <Header />
         {/* py-3 is used to give vertical padding */}
-        <Route path='/product/:id' component={ProductScreen} />
-        <Route path='/login' component={LoginScreen} />
-        <Route path='/profile' component={ProfileScreen} />
-        <Route path='/cart/:id?' component={CartScreen} />
-        <Route path='/checkout' component={Checkout} />
-        <Route path='/orderReceipt' component={OrderReceipt} />
-        <Route path='/orderHistory' component={OrderHistory} />
-        {/* <Route path='/search/:keyword' component={BrowsingScreen} /> */}
-        <Route
-          path='/search/:keyword/page/:pageNumber'
-          component={BrowsingScreen}
-        />
-        <Route path='/' exact={true} component={HomeScreen} />
+        <main
+          style={{
+            paddingBottom: '12rem',
+            position: 'relative',
+            minHeight: '86vh',
+          }}
+        >
+          <Route path='/product/:id' component={ProductScreen} />
+          <Route path='/login' component={LoginScreen} />
+          <Route path='/profile' component={ProfileScreen} />
+          <Route path='/cart/:id?' component={CartScreen} />
+          <Route path='/checkout' component={Checkout} />
+          <Route path='/orderReceipt' component={OrderReceipt} />
+          <Route path='/orderHistory' component={OrderHistory} />
+          {/* <Route path='/search/:keyword' component={BrowsingScreen} /> */}
+          <Route
+            path='/search/:keyword/page/:pageNumber'
+            component={BrowsingScreen}
+          />
+          <Route path='/' exact={true} component={HomeScreen} />
+        </main>
         <Footer />
       </>
     </BrowserRouter>
