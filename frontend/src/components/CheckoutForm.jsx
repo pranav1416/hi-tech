@@ -18,7 +18,12 @@ const CheckoutForm = ({ cartItems, price }) => {
   const [city, setCity] = useState(userInfo.address[0].city);
   const [stateV, setStateV] = useState(userInfo.address[0].state);
   const [zipcode, setZipCode] = useState(userInfo.address[0].zipcode);
-  const [paymentOption, setPaymentOption] = useState("");
+  const [paymentOption, setPaymentOption] = useState("cod");
+
+  const [creditCard, setCreditCard] = useState("");
+  const [expMonth, setExpMonth] = useState("");
+  const [expYear, setExpYear] = useState("");
+  const [ccv, setCCV] = useState("");
   const history = useHistory();
 
   const [validated, setValidated] = useState(false);
@@ -73,10 +78,10 @@ const CheckoutForm = ({ cartItems, price }) => {
   };
 
   const updateCategory = (e) => {
-    if(e.target.checked) {
-       setPaymentOption(e.target.value)
+    if (e.target.checked) {
+      setPaymentOption(e.target.value);
     }
-  }
+  };
 
   return (
     <>
@@ -89,7 +94,7 @@ const CheckoutForm = ({ cartItems, price }) => {
         onSubmit={handleSubmit}
       >
         <Form.Group controlId="formGroupEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label className="checkout_required">Email address</Form.Label>
           <Form.Control
             required
             type="email"
@@ -106,7 +111,7 @@ const CheckoutForm = ({ cartItems, price }) => {
 
         <Form.Row>
           <Form.Group as={Col} controlId="formGridFirstname">
-            <Form.Label>First Name</Form.Label>
+            <Form.Label className="checkout_required">First Name</Form.Label>
             <Form.Control
               required
               type="Firstname"
@@ -118,7 +123,7 @@ const CheckoutForm = ({ cartItems, price }) => {
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridLastname">
-            <Form.Label>Last Name</Form.Label>
+            <Form.Label className="checkout_required">Last Name</Form.Label>
             <Form.Control
               required
               type="Lastname"
@@ -131,7 +136,7 @@ const CheckoutForm = ({ cartItems, price }) => {
         </Form.Row>
 
         <Form.Group controlId="formGridAddress1">
-          <Form.Label>Address</Form.Label>
+          <Form.Label className="checkout_required">Address</Form.Label>
           <Form.Control
             required
             placeholder="1234 Main St"
@@ -152,7 +157,7 @@ const CheckoutForm = ({ cartItems, price }) => {
 
         <Form.Row>
           <Form.Group as={Col} controlId="formGridCity">
-            <Form.Label>City</Form.Label>
+            <Form.Label className="checkout_required">City</Form.Label>
             <Form.Control
               type="text"
               placeholder="City"
@@ -166,7 +171,7 @@ const CheckoutForm = ({ cartItems, price }) => {
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridState">
-            <Form.Label>State</Form.Label>
+            <Form.Label className="checkout_required">State</Form.Label>
             <Form.Control
               required
               type="text"
@@ -233,7 +238,7 @@ const CheckoutForm = ({ cartItems, price }) => {
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridZip">
-            <Form.Label>Zip</Form.Label>
+            <Form.Label className="checkout_required">Zip</Form.Label>
             <Form.Control
               type="digit"
               placeholder="Zip"
@@ -246,92 +251,94 @@ const CheckoutForm = ({ cartItems, price }) => {
             </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
-
         <h4 class="mystyle-checkout">Payment</h4>
 
         <Form.Group>
           <Form.Row>
             <Col md={3}>
-            <div>
-              <input
-                type="radio"
-                value="cod"
-                name="payment_method"
-                checked={paymentOption == "cod"}
-                required="required"
-                onChange={updateCategory}
-              />
-              Cash On Delivery
-            </div>
-            <div>
-              <input
-                type="radio"
-                name="payment_method"
-                value="card"
-                checked={paymentOption == "card"}
-                required
-                onChange={updateCategory}
-              />
-              Credit Card
-            </div>
+              <div>
+                <input
+                  type="radio"
+                  value="cod"
+                  name="payment_method"
+                  checked={paymentOption == "cod"}
+                  required="required"
+                  onChange={updateCategory}
+                />
+                Cash On Delivery
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="payment_method"
+                  value="card"
+                  checked={paymentOption == "card"}
+                  required
+                  onChange={updateCategory}
+                />
+                Credit Card
+              </div>
             </Col>
-            {paymentOption == "" || paymentOption == "cod"  ? (
+            {paymentOption == "" || paymentOption == "cod" ? (
               <div></div>
             ) : (
-              <Col> 
+              <Col>
                 <Row>
-                  <br/>
+                  <br />
                 </Row>
                 <Row>
-                  <br/>
+                  <br />
                 </Row>
                 <Row>
-                  <br/>
+                  <br />
                 </Row>
                 <Row>
                   <Form.Label>Credit Card</Form.Label>
-                  <Form.Control type="email" placeholder="Enter Credit Card" />
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Credit Card"
+                    value={creditCard}
+                    onChange={(e) => setCreditCard(e.target.value)}
+                  />
                 </Row>
                 <Row>
                   <Col className="expriation_date expr_margin_top">
-                      <Form.Label>Expiration Date</Form.Label>
-                      <Form.Control
-                        type="text"
-                        as="select"
-                        defaultValue="Month"
-                      >
-                        <option value="january">January</option>
-                        <option value="february">February</option>
-                        <option value="march">March</option>
-                        <option value="april">April</option>
-                        <option value="may">May</option>
-                        <option value="june">June</option>
-                        <option value="july">July</option>
-                        <option value="august">August</option>
-                        <option value="september">September</option>
-                        <option value="october">October</option>
-                        <option value="november">November</option>
-                        <option value="december">December</option>
-                      </Form.Control>
+                    <Form.Label>Expiration Date</Form.Label>
+                    <Form.Control type="text" as="select" defaultValue="Month"
+                      value={expMonth}
+                      onChange={(e) => setExpMonth(e.target.value)}>
+                      <option value="january">January</option>
+                      <option value="february">February</option>
+                      <option value="march">March</option>
+                      <option value="april">April</option>
+                      <option value="may">May</option>
+                      <option value="june">June</option>
+                      <option value="july">July</option>
+                      <option value="august">August</option>
+                      <option value="september">September</option>
+                      <option value="october">October</option>
+                      <option value="november">November</option>
+                      <option value="december">December</option>
+                    </Form.Control>
                   </Col>
                   <Col className="expr_margin_top">
-                  <Form.Label>Year</Form.Label>
-                      <Form.Control
-                        type="text"
-                        as="select"
-                        defaultValue="Month"
-                      >
-                        <option value="2021">2021</option>
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
-                        <option value="2024">2025</option>
-                        <option value="2024">2026</option>
-                      </Form.Control>
+                    <Form.Label>Year</Form.Label>
+                    <Form.Control type="text" as="select" defaultValue="Year"
+                    value={expYear}
+                    onChange={(e) => setExpYear(e.target.value)}>
+                      <option value="2021">2021</option>
+                      <option value="2022">2022</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                      <option value="2024">2025</option>
+                      <option value="2024">2026</option>
+                    </Form.Control>
                   </Col>
                   <Col className="expr_margin_top expriation_cvv">
                     <Form.Label>CVV</Form.Label>
-                    <Form.Control type="text" />
+                    <Form.Control type="text" 
+                      value={ccv}
+                      onChange={(e) => setCCV(e.target.value)}/>
                   </Col>
                 </Row>
               </Col>

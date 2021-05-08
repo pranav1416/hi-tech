@@ -34,6 +34,7 @@ body {
     font-family: Arial;
     text-align: left;
     padding-left: 0%;
+    
   }
   .radio {
     margin-top: 0;
@@ -55,4 +56,13 @@ body {
 
   .expriation_cvv {
     padding-right: 0px !important;
+  }
+
+  .checkout_required:after {
+    content:" *" !important;
+    color: red !important;
+  }
+
+  .inline_dispaly {
+    display:inline;
   }
