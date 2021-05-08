@@ -1,27 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card, Row } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import { getSpecialProduct } from '../actions/homeActions'
+import { useSelector } from 'react-redux'
 import Rating from './Rating'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
 const SpecialProduct = ({ specialProduct }) => {
-  //const [specialProd, setSpecialProduct] = useState({})
-  //const [avg, setAvg] = useState(0)
-  // const dispatch = useDispatch()
-  // const productSpecial = useSelector((state) => state.productSpecial)
-  // const { loadingSpecial, error, specialProduct } = productSpecial
-  // useEffect(() => {
-  //   dispatch(getSpecialProduct())
-  // }, [dispatch])
   const homeData = useSelector((state) => state.homeData)
   const { loadingData, error } = homeData
 
   const avg =
-    specialProduct.reviews.reduce((sum, review) => sum + review.reviewRating, 0) /
-    specialProduct.reviews.length
+    specialProduct.reviews.reduce(
+      (sum, review) => sum + review.reviewRating,
+      0
+    ) / specialProduct.reviews.length
 
   return (
     <Row>
@@ -50,10 +43,7 @@ const SpecialProduct = ({ specialProduct }) => {
             </Link>
 
             <Card.Text as='div'>
-              <Rating
-                value={avg}
-                text={specialProduct.reviews.length}
-              />
+              <Rating value={avg} text={specialProduct.reviews.length} />
             </Card.Text>
 
             <Card.Text as='h3'>

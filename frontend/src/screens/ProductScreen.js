@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-//import products from '../products'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProductDetails } from '../actions/productActions'
 import ProductImage from '../components/ProductImage'
@@ -8,10 +7,9 @@ import ProductAdd from '../components/ProductAdd'
 import ProductReview from '../components/ProductReview'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { Row, Col, Button, Form, Badge } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 
 const ProductScreen = (props) => {
-  const [qty, setQty] = useState(1)
   const productDetails = useSelector((state) => state.productDetails)
   const { loading, error, product } = productDetails
 
@@ -24,8 +22,6 @@ const ProductScreen = (props) => {
     return () => {}
   }, [dispatch, props.match])
 
-  //console.log(props.match.params.id)
-  //const product = products.products.find((x) => x._id === props.match.params.id)
   return (
     <>
       {loading ? (
@@ -40,13 +36,6 @@ const ProductScreen = (props) => {
           <Col>
             <ProductDetail product={product} />
             <ProductReview product={product} user={userInfo} />
-            {/* {
-              userInfo ? (
-                <ProductReview product={product} user={userInfo}/>
-              ) : (
-                <h1> Please Login</h1>
-              )
-            } */}
           </Col>
           <Col>
             <ProductAdd {...props} product={product} />

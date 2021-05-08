@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import './Footer.css'
 
 const Footer = () => {
@@ -27,15 +27,15 @@ const Footer = () => {
               <h5 className='pb-3'> FOLLOW US</h5>
               <span>
                 {' '}
-                <i class='fab fa-facebook'> </i>{' '}
+                <i className='fab fa-facebook'> </i>{' '}
               </span>
               <span>
                 {' '}
-                <i class='fab fa-instagram'> </i>{' '}
+                <i className='fab fa-instagram'> </i>{' '}
               </span>
               <span>
                 {' '}
-                <i class='fab fa-twitter'> </i>{' '}
+                <i className='fab fa-twitter'> </i>{' '}
               </span>
             </Col>
           </Row>

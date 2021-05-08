@@ -229,7 +229,7 @@ const LoginForm = () => {
     if (userInfo) {
       history.push('/')
     }
-  }, [dispatch, userLogin])
+  }, [dispatch, history, userInfo, userLogin])
 
   const handleSubmit = (e) => {
     e.preventDefault()

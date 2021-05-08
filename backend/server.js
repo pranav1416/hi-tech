@@ -30,18 +30,8 @@ app.use('/api/review', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/profile', profileRoutes)
 app.use('/api/orderHistory', orderHistoryRoutes)
-//app.use('/api/browser', BrowserRoutes)
-//app.use('/api/products', homeRoutes)
-
-// app.use(notFound)
-// app.use(errorHandler)
 
 if (process.env.NODE_ENV === 'development') {
-  // app.use(express.static(path.join(__dirname, '../frontend', 'build')))
-
-  // app.get('/*', (req, res) => {
-  //   res.sendFile(path.join(__dirname, '../frontend', 'build', 'index.html'))
-  // })
   app.get('/', (req, res) => {
     console.log('Inside API is running')
     res.send('API is running!')

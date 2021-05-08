@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, FormControl, Form } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
 import { listSearchProducts } from '../actions/browsingActions'
 import Loader from '../components/Loader'
@@ -20,7 +20,7 @@ const BrowsingScreen = ({ match }) => {
   useEffect(() => {
     console.log(keyword)
     dispatch(listSearchProducts(keyword, pageNumber, category))
-  }, [dispatch, keyword, pageNumber, match])
+  }, [dispatch, keyword, pageNumber, match, category])
 
   return (
     <>
@@ -43,7 +43,7 @@ const BrowsingScreen = ({ match }) => {
             <Col sm={12} md={10} lg={10} xl={10}>
               <Row>
                 {products.map((product) => (
-                  <Col sm={12} md={6} lg={4} xl={3}>
+                  <Col sm={12} md={6} lg={4} xl={3} key={product.id}>
                     <Product style={{ paddingTop: '10px' }} product={product} />
                   </Col>
                 ))}

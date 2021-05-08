@@ -1,5 +1,4 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
 import { BrowserRouter, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -36,7 +35,6 @@ const App = () => {
           <Route path='/checkout' component={Checkout} />
           <Route path='/orderReceipt' component={OrderReceipt} />
           <Route path='/orderHistory' component={OrderHistory} />
-          {/* <Route path='/search/:keyword' component={BrowsingScreen} /> */}
           <Route
             path='/search/:keyword?/page/:pageNumber/:category?'
             component={BrowsingScreen}

@@ -9,7 +9,6 @@ import Review from '../models/reviewModel.js'
 import Product from '../models/productModel.js'
 
 router.route('/').get(getProducts)
-// router.get('/editdb', editProducts)
 router.route('/:id').get(getProductById)
 
 router.post(
@@ -26,9 +25,6 @@ router.post(
     const updatedProduct = await Product.update(
       {
         _id: req.body.productId,
-        // name: req.body.name,
-        // rating: req.body.rating,
-        // comment: req.body.comment
       },
       {
         $push: {

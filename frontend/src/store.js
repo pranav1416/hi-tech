@@ -1,6 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import { composeWithDevTools } from 'redux-devtools-extension'
 import {
   productListReducer,
   productDetailsReducer,
@@ -14,13 +13,8 @@ import {
   userUpdateProfileReducer,
 } from './reducers/userReducer'
 import { searchProductsReducer } from './reducers/browsingReducer'
-import {
-  productAllTopRatedReducer,
-  productFetchReducer,
-  productTopRatedReducer,
-  productSpecialReducer,
-  homeDataReducer,
-} from './reducers/homeReducer'
+import { productFetchReducer, homeDataReducer } from './reducers/homeReducer'
+
 const reducer = combineReducers({
   productFetch: productFetchReducer,
   productList: productListReducer,
@@ -32,9 +26,6 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
   searchProducts: searchProductsReducer,
-  productTopRated: productTopRatedReducer,
-  productAllTopRated: productAllTopRatedReducer,
-  productSpecial: productSpecialReducer,
   homeData: homeDataReducer,
 })
 
@@ -57,10 +48,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
   reducer,
   initialState,
-  composeEnhancers(
-    applyMiddleware(thunk, ...middleware)
-    // other store enhancers if any
-  )
+  composeEnhancers(applyMiddleware(thunk, ...middleware))
 )
 
 export default store

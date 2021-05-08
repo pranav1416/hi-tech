@@ -6,27 +6,27 @@ import Message from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 
 function parseQuery(queryString) {
-  var query = {};
-  var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+  var query = {}
+  var pairs = (queryString[0] === '?'
+    ? queryString.substr(1)
+    : queryString
+  ).split('&')
   for (var i = 0; i < pairs.length; i++) {
-      var pair = pairs[i].split('=');
-      query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+    var pair = pairs[i].split('=')
+    query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '')
   }
-  return query;
+  return query
 }
 
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id
-  var queryParams = parseQuery(location.search);
+  var queryParams = parseQuery(location.search)
   const qty = queryParams['qty'] ? Number(queryParams['qty']) : 1
   const userID = queryParams['userID'] ? queryParams['userID'] : 1
 
-  function float2int (value) {
-    return value | 0;
-  } 
-
-  // const intCountInStock =
-  //   float2int(product.countInStock)
+  function float2int(value) {
+    return value | 0
+  }
 
   const dispatch = useDispatch()
 
@@ -79,12 +79,14 @@ const CartScreen = ({ match, location, history }) => {
                             )
                           }}
                         >
-                          {[...Array(float2int(item.countInStock)).keys()].map((x) => (
-                            <option key={x + 1} value={x + 1}>
-                              {' '}
-                              {x + 1}{' '}
-                            </option>
-                          ))}
+                          {[...Array(float2int(item.countInStock)).keys()].map(
+                            (x) => (
+                              <option key={x + 1} value={x + 1}>
+                                {' '}
+                                {x + 1}{' '}
+                              </option>
+                            )
+                          )}
                         </Form.Control>
                       </Col>
                       <Col md={2}>

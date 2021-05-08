@@ -1,18 +1,9 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import {
-  Navbar,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-  Container,
-  NavDropdown,
-} from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import SearchBox from './SearchBox'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-
 import { logout } from '../actions/userActions'
 
 const Header = () => {

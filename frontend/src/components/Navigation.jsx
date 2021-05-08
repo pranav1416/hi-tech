@@ -41,6 +41,11 @@ const Navigation = () => {
               </LinkContainer>
             </Nav.Item>
             <Nav.Item>
+              <LinkContainer to={urlPath + '/Mobile'}>
+                <Nav.Link eventKey='Mobile'>Mobile</Nav.Link>
+              </LinkContainer>
+            </Nav.Item>
+            <Nav.Item>
               <LinkContainer to={urlPath + '/Cameras'}>
                 <Nav.Link eventKey='Cameras/Camcorders'>
                   Cameras/Camcorders

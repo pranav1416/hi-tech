@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col, Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -57,12 +56,11 @@ const ProfileScreen = ({ history }) => {
         setZipcode(user.address[0].zipcode)
       }
     }
-    //console.log(editName)
   }, [dispatch, history, userInfo, user])
 
   useEffect(() => {
     dispatch(getUserDetails('profile'))
-  }, [success])
+  }, [dispatch, success])
 
   const handleSubmit = (e) => {
     e.preventDefault()

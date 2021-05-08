@@ -63,16 +63,15 @@ const Rating = ({ value, text, color }) => {
           }
         ></i>
       </span>
-      {text == 1 ? ( 
+      {text === 1 ? (
         <span> ({text && text} Review)</span>
-      ) : text == 0 ? ( 
+      ) : text === 0 ? (
         <span> ({text && text} Review)</span>
       ) : text < 0 ? (
-        <span>  </span>
+        <span> </span>
       ) : (
         <span> ({text && text} Reviews)</span>
       )}
-      
     </div>
   )
 }

@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import React, { useState } from 'react'
 import { Jumbotron, Form, Button, Col, Badge } from 'react-bootstrap'
 import Rating from './Rating'
 
@@ -12,12 +10,11 @@ const ProductAdd = ({ history, product, match }) => {
     history.push(`/cart/${match.params.id}?qty=${qty}`)
   }
 
-  function float2int (value) {
-    return value | 0;
-  } 
+  function float2int(value) {
+    return value | 0
+  }
 
-  const intCountInStock =
-    float2int(product.countInStock)
+  const intCountInStock = float2int(product.countInStock)
 
   const avg =
     product.reviews.reduce((sum, review) => sum + review.reviewRating, 0) /
@@ -25,12 +22,16 @@ const ProductAdd = ({ history, product, match }) => {
 
   return (
     <Jumbotron>
-      {product.originPrice > product.price ? ( 
-        <h1><del>$ {product.originPrice} </del>  $ {product.price}</h1>
+      {product.originPrice > product.price ? (
+        <h1>
+          <del>$ {product.originPrice} </del> $ {product.price}
+        </h1>
       ) : (
         <h1>$ {product.price} </h1>
       )}
-      <h5><Rating value={avg} text={product.reviews.length} /></h5>
+      <h5>
+        <Rating value={avg} text={product.reviews.length} />
+      </h5>
       <p>Availibity: {intCountInStock} in stock!</p>
       <p>
         {intCountInStock > 0 ? (

@@ -1,11 +1,15 @@
 import axios from 'axios'
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_REMOVE_ALL_ITEMS } from '../constants/cartConstants'
+import {
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  CART_REMOVE_ALL_ITEMS,
+} from '../constants/cartConstants'
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
   const { data } = await axios.get(`/api/products/${id}`)
-  var discountV = 0;
-  if (data.prices.isSale == true) {
-    discountV = data.prices.amountMax - data.prices.amountMin;
+  var discountV = 0
+  if (data.prices.isSale === true) {
+    discountV = data.prices.amountMax - data.prices.amountMin
   }
 
   dispatch({
@@ -17,7 +21,7 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
       image: data.imageURLs[0],
       countInStock: data.countInStock,
       qty,
-      discount: discountV
+      discount: discountV,
     },
   })
 
@@ -35,7 +39,7 @@ export const removeFromCart = (id) => (dispatch, getState) => {
 
 export const removeAllFromCart = () => (dispatch, getState) => {
   dispatch({
-    type: CART_REMOVE_ALL_ITEMS
+    type: CART_REMOVE_ALL_ITEMS,
   })
 
   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))

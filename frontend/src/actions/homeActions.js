@@ -1,23 +1,8 @@
 import axios from 'axios'
 import {
-  PRODUCT_SPECIAL_REQUEST,
-  PRODUCT_SPECIAL_SUCCESS,
-  PRODUCT_SPECIAL_FAIL,
-  BANNER_ADD_REQUEST,
-  BANNER_ADD_SUCCESS,
-  BANNER_ADD_FAIL,
-  DROPDOWN_REQUEST,
-  DROPDOWN_SUCCESS,
-  DROPDOWN_FAIL,
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_FAIL,
-  PRODUCT_TOP_REQUEST,
-  PRODUCT_TOP_SUCCESS,
-  PRODUCT_TOP_FAIL,
-  PRODUCT_ALL_TOP_REQUEST,
-  PRODUCT_ALL_TOP_SUCCESS,
-  PRODUCT_ALL_TOP_FAIL,
   HOME_DATA_REQUEST,
   HOME_DATA_SUCCESS,
   HOME_DATA_FAIL,
@@ -30,73 +15,6 @@ export const fetchProducts = () => async (dispatch) => {
     })
 
     const { data } = await axios.get('/api/home')
-
-    dispatch({
-      type: FETCH_PRODUCTS_SUCCESS,
-      payload: data,
-    })
-  } catch (error) {
-    dispatch({
-      type: FETCH_PRODUCTS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    })
-  }
-}
-
-export const listTopProducts = () => async (dispatch) => {
-  try {
-    dispatch({
-      type: PRODUCT_TOP_REQUEST,
-    })
-
-    const { data } = await axios.get('/api/home/top')
-    dispatch({
-      type: PRODUCT_TOP_SUCCESS,
-      payload: data,
-    })
-  } catch (error) {
-    dispatch({
-      type: PRODUCT_TOP_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    })
-  }
-}
-
-export const listAllTopProducts = () => async (dispatch) => {
-  try {
-    dispatch({
-      type: PRODUCT_ALL_TOP_REQUEST,
-    })
-
-    const { data } = await axios.get('/api/home/toprated')
-    dispatch({
-      type: PRODUCT_ALL_TOP_SUCCESS,
-      payload: data,
-    })
-  } catch (error) {
-    dispatch({
-      type: PRODUCT_ALL_TOP_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    })
-  }
-}
-
-export const getSpecialProduct = () => async (dispatch) => {
-  try {
-    dispatch({
-      type: FETCH_PRODUCTS_REQUEST,
-    })
-
-    const { data } = await axios.get('/api/home/special')
 
     dispatch({
       type: FETCH_PRODUCTS_SUCCESS,
@@ -135,85 +53,3 @@ export const getHomeData = () => async (dispatch) => {
     })
   }
 }
-
-// export const ProductOnSale = () => async (dispatch) => {
-//   try {
-//     dispatch({
-//       type: PRODUCT_SALE_REQUEST,
-//     })
-
-//     const { data } = await axios.get(`/api/products/${product.isSale}`)
-
-//     dispatch({
-//       type: PRODUCT_SALE_SUCCESS,
-//       payload: {
-//         product: data._id,
-//         name: data.name,
-//         image: data.imageURLs,
-//         price: data.prices.amountMin,
-//         countInStock: data.countInStock,
-//         weight: data.weight,
-//         brand: data.brand,
-//         reviewName: data.reviews.name,
-//         reviewRating: data.reviews.rating,
-//         reviewComment: data.reviews.comment,
-//         description: data.categories,
-//         productCode: data.upc,
-//         customQty: data.qty,
-//       },
-//     })
-//   } catch (error) {
-//     dispatch({
-//       type: PRODUCT_SALE_FAIL,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message,
-//     })
-//   }
-// }
-
-// export const Banner = () => async (dispatch) => {
-//   try {
-//     dispatch({
-//       type: BANNER_ADD_REQUEST,
-//     })
-
-//     const { data } = await axios.get(`/api/products/${product.image}`)
-
-//     dispatch({
-//       type: BANNER_ADD_SUCCESS,
-//       payload: data,
-//     })
-//   } catch (error) {
-//     dispatch({
-//       type: BANNER_ADD_FAIL,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message,
-//     })
-//   }
-// }
-// export const Dropdown = () => async (dispatch) => {
-//   try {
-//     dispatch({
-//       type: DROPDOWN_REQUEST,
-//     })
-
-//     const { data } = await axios.get(`/api/products/${product.categories}`)
-
-//     dispatch({
-//       type: DROPDOWN_SUCCESS,
-//       payload: data,
-//     })
-//   } catch (error) {
-//     dispatch({
-//       type: DROPDOWN_FAIL,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message,
-//     })
-//   }
-// }
