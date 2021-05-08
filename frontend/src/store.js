@@ -18,6 +18,8 @@ import {
   productAllTopRatedReducer,
   productFetchReducer,
   productTopRatedReducer,
+  productSpecialReducer,
+  homeDataReducer,
 } from './reducers/homeReducer'
 const reducer = combineReducers({
   productFetch: productFetchReducer,
@@ -32,6 +34,8 @@ const reducer = combineReducers({
   searchProducts: searchProductsReducer,
   productTopRated: productTopRatedReducer,
   productAllTopRated: productAllTopRatedReducer,
+  productSpecial: productSpecialReducer,
+  homeData: homeDataReducer,
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')

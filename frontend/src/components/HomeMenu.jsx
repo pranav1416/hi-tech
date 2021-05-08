@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row, Tabs, Tab, Dropdown } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { listAllTopProducts } from '../actions/homeActions'
+import { fetchProducts, listAllTopProducts } from '../actions/homeActions'
+import Loader from './Loader'
+import Message from './Message'
 import Product from './Product'
 import SpecialProduct from './SpecialProduct'
 const prods = [
@@ -169,101 +171,114 @@ const prods = [
     ],
   },
 ]
-const HomeMenu = ({ saleProducts }) => {
-  const dispatch = useDispatch()
-  const productAllTopRated = useSelector((state) => state.productAllTopRated)
-  const { loading, productTopEight, error } = productAllTopRated
+const HomeMenu = ({ specialProduct, saleProducts, topProducts }) => {
+  const homeData = useSelector((state) => state.homeData)
+  const { loadingData, error } = homeData
+  // const dispatch = useDispatch()
+  // const productAllTopRated = useSelector((state) => state.productAllTopRated)
+  // const { loading, productTopEight, error } = productAllTopRated
 
-  const productFetch = useSelector((state) => state.productFetch)
-  const { products } = productFetch
-  let specialProduct = prods[1]
+  // const productFetch = useSelector((state) => state.productFetch)
+  // const { products } = productFetch
 
-  useEffect(() => {
-    dispatch(listAllTopProducts())
-    // if (products) {
-    //   const saleProducts = products.filter(
-    //     (product) =>
-    //       product.prices.isSale === true &&
-    //       product.prices.amountMax > product.prices.amountMin
-    //   )
-    //   var max = 0
-    //   for (var i = 0; i < saleProducts.length; ++i) {
-    //     if (
-    //       saleProducts[i].prices.amountMax - saleProducts[i].prices.amountMin >
-    //       max
-    //     ) {
-    //       specialProduct = saleProducts[i]
-    //     }
-    //   }
-    //   console.log(specialProduct)
-    // }
-  }, [dispatch])
+  // const productSpecial = useSelector((state) => state.productSpecial)
+  // const { loadingSpecial, specialProduct } = productSpecial
 
+  // let saleProducts = []
+  useEffect(() => {}, [specialProduct, saleProducts, topProducts])
+
+  // const getSaleProducts = (products) => {
+  //   const saleProducts = products.filter(
+  //     (product) =>
+  //       product.prices.isSale === true &&
+  //       product.prices.amountMax > product.prices.amountMin
+  //   )
+  //   return saleProducts.slice(0, 8)
+  // }
   return (
-    <Row style={{ paddingTop: '0.5rem' }}>
-      <Col sm={3} md={3} xl={3} style={{ paddingLeft: '2rem' }}>
-        <Row>
-          <Col>
-            <Dropdown>
-              <Dropdown.Toggle
-                variant='success'
-                id='dropdown-basic'
-                style={{ width: '100%', height: '2.5rem' }}
-              >
-                All Categories
-              </Dropdown.Toggle>
+    <Row style={{ paddingTop: '0.5rem', paddingLeft: '0.5rem' }}>
+      {loadingData ? (
+        <Loader />
+      ) : error ? (
+        <Message variant='danger'>{error}</Message>
+      ) : (
+        <>
+          <Col sm={3} md={3} lg={3} style={{ paddingLeft: '0rem' }}>
+            <Row>
+              <Col>
+                <Dropdown>
+                  <Dropdown.Toggle
+                    variant='success'
+                    id='dropdown-basic'
+                    style={{ width: '100%', height: '2.5rem' }}
+                  >
+                    All Categories
+                  </Dropdown.Toggle>
 
-              <Dropdown.Menu style={{ width: '100%' }}>
-                <Dropdown.Item href='#/action-1'>Audio</Dropdown.Item>
-                <Dropdown.Item href='#/action-2'>Computers</Dropdown.Item>
-                <Dropdown.Item href='#/action-3'>TV</Dropdown.Item>
-                <Dropdown.Item href='#/action-4'>
-                  Cameras/Camcorders
-                </Dropdown.Item>
-                <Dropdown.Item href='#/action-5'>Car Electronics</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+                  <Dropdown.Menu style={{ width: '100%' }}>
+                    <Dropdown.Item href='#/action-1'>Audio</Dropdown.Item>
+                    <Dropdown.Item href='#/action-2'>Computers</Dropdown.Item>
+                    <Dropdown.Item href='#/action-3'>TV</Dropdown.Item>
+                    <Dropdown.Item href='#/action-4'>
+                      Cameras/Camcorders
+                    </Dropdown.Item>
+                    <Dropdown.Item href='#/action-5'>
+                      Car Electronics
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {specialProduct.name ? (
+                  <SpecialProduct specialProduct={specialProduct} />
+                ) : (
+                  'ERROR'
+                )}
+              </Col>
+            </Row>
           </Col>
-        </Row>
-        <Row>
-          <Col>
-            <SpecialProduct specialProd={specialProduct} />
-          </Col>
-        </Row>
-      </Col>
-      <Col sm={9} md={9} xl={9}>
-        <Row>
-          <Col style={{ marginLeft: '-1.5rem' }}>
-            <Tabs defaultActiveKey='onSale' id='home-menu-tabs' fill justify>
-              <Tab eventKey='onSale' title='On Sale'>
-                <Row>
-                  {saleProducts.map((product) => (
-                    <Col sm={12} md={6} lg={4} xl={3}>
-                      <Product
-                        style={{ paddingTop: '10px' }}
-                        product={product}
-                      />
-                    </Col>
-                  ))}
-                </Row>
-              </Tab>
+          <Col sm={9} md={9} lg={9}>
+            <Row>
+              <Col style={{ marginLeft: '-1.5rem' }}>
+                <Tabs
+                  defaultActiveKey='onSale'
+                  id='home-menu-tabs'
+                  fill
+                  justify
+                >
+                  <Tab eventKey='onSale' title='On Sale'>
+                    <Row style={{ paddingLeft: '1.5rem' }}>
+                      {saleProducts.map((product) => (
+                        <Col sm={12} md={6} lg={4} xl={3}>
+                          <Product
+                            style={{ paddingTop: '10px' }}
+                            product={product}
+                          />
+                        </Col>
+                      ))}
+                    </Row>
+                  </Tab>
 
-              <Tab eventKey='topRated' title='Top Rated'>
-                <Row>
-                  {productTopEight.map((product) => (
-                    <Col sm={12} md={6} lg={4} xl={3}>
-                      <Product
-                        style={{ paddingTop: '10px' }}
-                        product={product}
-                      />
-                    </Col>
-                  ))}
-                </Row>
-              </Tab>
-            </Tabs>
+                  <Tab eventKey='topRated' title='Top Rated'>
+                    <Row>
+                      {topProducts.map((product) => (
+                        <Col sm={12} md={6} lg={4} xl={3}>
+                          <Product
+                            style={{ paddingTop: '10px' }}
+                            product={product}
+                          />
+                        </Col>
+                      ))}
+                    </Row>
+                  </Tab>
+                </Tabs>
+              </Col>
+            </Row>
           </Col>
-        </Row>
-      </Col>
+        </>
+      )}
     </Row>
   )
 }

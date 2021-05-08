@@ -25,6 +25,8 @@ const App = () => {
             paddingBottom: '12rem',
             position: 'relative',
             minHeight: '86vh',
+            marginTop: '3.7rem',
+            maxWidth: '100vw',
           }}
         >
           <Route path='/product/:id' component={ProductScreen} />

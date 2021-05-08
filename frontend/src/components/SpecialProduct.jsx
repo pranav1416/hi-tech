@@ -1,90 +1,76 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Card } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
+import { Card, Row } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { getSpecialProduct } from '../actions/homeActions'
 import Rating from './Rating'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
-const SpecialProduct = ({ specialProd }) => {
+const SpecialProduct = ({ specialProduct }) => {
   //const [specialProd, setSpecialProduct] = useState({})
   //const [avg, setAvg] = useState(0)
-
-  const productFetch = useSelector((state) => state.productFetch)
-  const { loading, error, products } = productFetch
-  const avg =
-    specialProd.reviews.reduce((sum, review) => sum + review.reviewRating, 0) /
-    specialProd.reviews.length
+  // const dispatch = useDispatch()
+  // const productSpecial = useSelector((state) => state.productSpecial)
+  // const { loadingSpecial, error, specialProduct } = productSpecial
   // useEffect(() => {
-  //   const saleProducts = products.filter(
-  //     (product) =>
-  //       product.prices.isSale === true &&
-  //       product.prices.amountMax > product.prices.amountMin
-  //   )
-  //   let specialProduct = {}
-  //   if (saleProducts.length) {
-  //     specialProduct = saleProducts.reduce(function (prev, current) {
-  //       return prev.prices.amountMax - prev.prices.amountMin >
-  //         current.prices.amountMax - current.prices.amountMin
-  //         ? prev
-  //         : current
-  //     })
-  //   }
-  //   const average =
-  //     specialProduct.reviews.reduce(
-  //       (sum, review) => sum + review.reviewRating,
-  //       0
-  //     ) / specialProduct.reviews.length
-  //   console.log(specialProduct)
-  //   setSpecialProduct(specialProduct)
-  //   setAvg(average)
-  // }, [specialProd])
+  //   dispatch(getSpecialProduct())
+  // }, [dispatch])
+  const homeData = useSelector((state) => state.homeData)
+  const { loadingData, error } = homeData
+
   return (
-    <>
-      {loading && specialProd.imageURLs.length ? (
+    <Row>
+      {loadingData ? (
         <Loader />
-      ) : error ? (
+      ) : error && specialProduct.imageURLs.length === 0 ? (
         <Message variant='danger'>{error}</Message>
-      ) : (
-        <Card className='my-5 p-1 rounded' style={{ width: '18rem' }}>
+      ) : specialProduct ? (
+        <Card className='my-1 rounded'>
           <Card.Header className='mx-auto my-auto'>
             <h2>Special Offer!!</h2>
           </Card.Header>
-          <Link to={`/product/${specialProd._id}`}>
+          <Link to={`/product/${specialProduct._id}`}>
             <Card.Img
-              src={specialProd.imageURLs[0]}
+              src={specialProduct.imageURLs[0]}
               variant='top'
-              style={{ paddingLeft: '0rem', width: '16rem', height: '200px' }}
+              style={{ width: '97.5%', height: '70%', paddingLeft: '3%' }}
             />
           </Link>
 
           <Card.Body>
-            <Link to={`/product/${specialProd._id}`}>
+            <Link to={`/product/${specialProduct._id}`}>
               <Card.Title as='div'>
-                <strong>{specialProd.name}</strong>
+                <strong>{specialProduct.name}</strong>
               </Card.Title>
             </Link>
 
             <Card.Text as='div'>
-              <Rating value={avg} text={specialProd.reviews.length} />
+              <Rating
+                value={specialProduct.avg}
+                text={specialProduct.reviews.length}
+              />
             </Card.Text>
 
             <Card.Text as='h3'>
               <>
-                {specialProd.prices.amountMax > specialProd.prices.amountMin ? (
+                {specialProduct.prices.amountMax >
+                specialProduct.prices.amountMin ? (
                   <p>
-                    <del>$ {specialProd.prices.amountMax} </del> ${' '}
-                    {specialProd.prices.amountMin}
+                    <del>$ {specialProduct.prices.amountMax} </del> ${' '}
+                    {specialProduct.prices.amountMin}
                   </p>
                 ) : (
-                  <p>$ {specialProd.prices.amountMin}</p>
+                  <p>$ {specialProduct.prices.amountMin}</p>
                 )}
               </>
             </Card.Text>
           </Card.Body>
         </Card>
+      ) : (
+        'Error'
       )}
-    </>
+    </Row>
   )
 }
 

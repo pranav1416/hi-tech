@@ -1,8 +1,8 @@
 import axios from 'axios'
 import {
-  PRODUCT_SALE_REQUEST,
-  PRODUCT_SALE_SUCCESS,
-  PRODUCT_SALE_FAIL,
+  PRODUCT_SPECIAL_REQUEST,
+  PRODUCT_SPECIAL_SUCCESS,
+  PRODUCT_SPECIAL_FAIL,
   BANNER_ADD_REQUEST,
   BANNER_ADD_SUCCESS,
   BANNER_ADD_FAIL,
@@ -18,6 +18,9 @@ import {
   PRODUCT_ALL_TOP_REQUEST,
   PRODUCT_ALL_TOP_SUCCESS,
   PRODUCT_ALL_TOP_FAIL,
+  HOME_DATA_REQUEST,
+  HOME_DATA_SUCCESS,
+  HOME_DATA_FAIL,
 } from '../constants/homeConstants.js'
 
 export const fetchProducts = () => async (dispatch) => {
@@ -79,6 +82,52 @@ export const listAllTopProducts = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_ALL_TOP_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const getSpecialProduct = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: FETCH_PRODUCTS_REQUEST,
+    })
+
+    const { data } = await axios.get('/api/home/special')
+
+    dispatch({
+      type: FETCH_PRODUCTS_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: FETCH_PRODUCTS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const getHomeData = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: HOME_DATA_REQUEST,
+    })
+
+    const { data } = await axios.get('/api/home/data')
+
+    dispatch({
+      type: HOME_DATA_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: HOME_DATA_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

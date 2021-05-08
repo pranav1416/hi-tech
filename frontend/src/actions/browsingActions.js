@@ -5,16 +5,18 @@ import {
   PRODUCT_SEARCH_SUCCESS,
 } from '../constants/browsingConstants'
 
-export const listSearchProducts = (keyword = '', pageNumber = '') => async (
-  dispatch
-) => {
+export const listSearchProducts = (
+  keyword = '',
+  pageNumber = '',
+  category = 'all'
+) => async (dispatch) => {
   try {
     dispatch({
       type: PRODUCT_SEARCH_REQUEST,
     })
     console.log(keyword)
     const { data } = await axios.get(
-      `/api/search/product?keyword=${keyword}&pageNumber=${pageNumber}`
+      `/api/search/product?keyword=${keyword}&pageNumber=${pageNumber}&category=${category}`
     )
     dispatch({
       type: PRODUCT_SEARCH_SUCCESS,

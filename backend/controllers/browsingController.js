@@ -13,9 +13,25 @@ const getSearchProducts = asyncHandler(async (req, res) => {
       }
     : {}
 
-  const count = await Product.countDocuments({ ...keyword })
+  const category = req.query.category || 'all'
+  let keywordQuery
+  if (category === 'all') {
+    keywordQuery = keyword
+      ? {
+          name: { $regex: req.query.keyword, $options: 'i' },
+        }
+      : {}
+  } else if (category !== 'all') {
+    keywordQuery = keyword
+      ? {
+          name: { $regex: req.query.keyword, $options: 'i' },
+          primaryCategories: category,
+        }
+      : { primaryCategories: category }
+  }
+  const count = await Product.countDocuments({ ...keywordQuery })
 
-  const products = await Product.find({ ...keyword })
+  const products = await Product.find({ ...keywordQuery })
     .populate('reviews')
     .limit(pageSize)
     .skip(pageSize * (page - 1))

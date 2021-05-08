@@ -5,6 +5,8 @@ import {
   getAllProducts,
   getTopProducts,
   getAllTopProducts,
+  getSpecialProduct,
+  getHomeData,
 } from '../controllers/homeController.js'
 const router = express.Router()
 
@@ -12,8 +14,11 @@ const router = express.Router()
 // @route GET /api/products
 // @access Public
 router.get('/', getAllProducts)
+router.get('/data', getHomeData)
 router.get('/top', getTopProducts)
 router.get('/toprated', getAllTopProducts)
+router.get('/special', getSpecialProduct)
+
 // router.get(
 //   '/:Sale',
 //   asyncHandler(async (req, res) => {

@@ -8,6 +8,12 @@ import {
   PRODUCT_ALL_TOP_REQUEST,
   PRODUCT_ALL_TOP_SUCCESS,
   PRODUCT_ALL_TOP_FAIL,
+  PRODUCT_SPECIAL_REQUEST,
+  PRODUCT_SPECIAL_SUCCESS,
+  PRODUCT_SPECIAL_FAIL,
+  HOME_DATA_REQUEST,
+  HOME_DATA_FAIL,
+  HOME_DATA_SUCCESS,
 } from '../constants/homeConstants.js'
 
 export const productFetchReducer = (state = { products: [] }, action) => {
@@ -55,21 +61,49 @@ export const productAllTopRatedReducer = (
   }
 }
 
-// export const ProductSaleReducer = (
-//   state = (state = { products: { isSale: [] } }),
-//   action
-// ) => {
-//   switch (action.type) {
-//     case PRODUCT_SALE_REQUEST:
-//       return { loading: true, ...state }
-//     case PRODUCT_SALE_SUCCESS:
-//       return { loading: false, product: action.payload }
-//     case PRODUCT_SALE_FAIL:
-//       return { loading: false, error: action.payload }
-//     default:
-//       return state
-//   }
-// }
+export const productSpecialReducer = (
+  state = { specialProduct: {} },
+  action
+) => {
+  switch (action.type) {
+    case PRODUCT_SPECIAL_REQUEST:
+      return { loadingSpecial: true }
+    case PRODUCT_SPECIAL_SUCCESS:
+      return { loadingSpecial: false, specialProduct: action.payload }
+    case PRODUCT_SPECIAL_FAIL:
+      return { loadingSpecial: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const homeDataReducer = (
+  state = {
+    specialProduct: {},
+    productTopEight: [],
+    productTopThree: [],
+    saleProds: [],
+  },
+  action
+) => {
+  switch (action.type) {
+    case HOME_DATA_REQUEST:
+      return { loadingData: true }
+    case HOME_DATA_SUCCESS:
+      return {
+        loadingData: false,
+        specialProduct: action.payload.specialProduct,
+        productTopEight: action.payload.topEightProducts,
+        productTopThree: action.payload.topThreeProducts,
+        saleProds: action.payload.saleProds,
+      }
+    case HOME_DATA_FAIL:
+      return { loadingData: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
 // export const BannerReducer = (state = (state = { products: [] }), action) => {
 //   switch (action.type) {
 //     case BANNER_ADD_REQUEST:

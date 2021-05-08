@@ -6,6 +6,7 @@ import { listSearchProducts } from '../actions/browsingActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Paginate from '../components/Paginate'
+import Navigation from '../components/Navigation'
 
 const BrowsingScreen = ({ match }) => {
   const dispatch = useDispatch()
@@ -29,17 +30,28 @@ const BrowsingScreen = ({ match }) => {
       ) : (
         <>
           <Row>
-            {products.map((product) => (
-              <Col sm={12} md={6} lg={4} xl={3}>
-                <Product style={{ paddingTop: '10px' }} product={product} />
-              </Col>
-            ))}
+            <Col sm={12} md={1} lg={1} xl={1}>
+              <Navigation />
+            </Col>
+            <Col sm={12} md={10} lg={10} xl={9}>
+              <Row>
+                {products.map((product) => (
+                  <Col sm={12} md={6} lg={4} xl={3}>
+                    <Product style={{ paddingTop: '10px' }} product={product} />
+                  </Col>
+                ))}
+              </Row>
+            </Col>
           </Row>
-          <Paginate
-            pages={pages}
-            page={page}
-            keyword={keyword ? keyword : ''}
-          />
+          <Row>
+            <Col>
+              <Paginate
+                pages={pages}
+                page={page}
+                keyword={keyword ? keyword : ''}
+              />
+            </Col>
+          </Row>
         </>
       )}
     </>
