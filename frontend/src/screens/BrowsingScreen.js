@@ -13,13 +13,14 @@ const BrowsingScreen = ({ match }) => {
 
   const keyword = match.params.keyword
   const pageNumber = match.params.pageNumber || 1
+  const category = match.params.category || 'all'
   const searchProducts = useSelector((state) => state.searchProducts)
   const { loading, products, error, pages, page } = searchProducts
 
   useEffect(() => {
     console.log(keyword)
-    dispatch(listSearchProducts(keyword, pageNumber))
-  }, [dispatch, keyword, pageNumber])
+    dispatch(listSearchProducts(keyword, pageNumber, category))
+  }, [dispatch, keyword, pageNumber, match])
 
   return (
     <>
@@ -30,10 +31,16 @@ const BrowsingScreen = ({ match }) => {
       ) : (
         <>
           <Row>
-            <Col sm={12} md={1} lg={1} xl={1}>
+            <Col
+              sm={12}
+              md={2}
+              lg={2}
+              xl={2}
+              style={{ width: '100%', paddingTop: '1rem' }}
+            >
               <Navigation />
             </Col>
-            <Col sm={12} md={10} lg={10} xl={9}>
+            <Col sm={12} md={10} lg={10} xl={10}>
               <Row>
                 {products.map((product) => (
                   <Col sm={12} md={6} lg={4} xl={3}>
@@ -44,11 +51,18 @@ const BrowsingScreen = ({ match }) => {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                paddingTop: '0.75rem',
+              }}
+            >
               <Paginate
                 pages={pages}
                 page={page}
                 keyword={keyword ? keyword : ''}
+                category={category}
               />
             </Col>
           </Row>

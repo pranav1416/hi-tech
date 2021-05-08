@@ -38,7 +38,7 @@ const App = () => {
           <Route path='/orderHistory' component={OrderHistory} />
           {/* <Route path='/search/:keyword' component={BrowsingScreen} /> */}
           <Route
-            path='/search/:keyword/page/:pageNumber'
+            path='/search/:keyword?/page/:pageNumber/:category?'
             component={BrowsingScreen}
           />
           <Route path='/' exact={true} component={HomeScreen} />

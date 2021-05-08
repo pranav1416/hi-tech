@@ -8,10 +8,6 @@ const getSearchProducts = asyncHandler(async (req, res) => {
   const pageSize = 8
   const page = Number(req.query.pageNumber) || 1
   const keyword = req.query.keyword
-    ? {
-        name: { $regex: req.query.keyword, $options: 'i' },
-      }
-    : {}
 
   const category = req.query.category || 'all'
   let keywordQuery
@@ -25,9 +21,9 @@ const getSearchProducts = asyncHandler(async (req, res) => {
     keywordQuery = keyword
       ? {
           name: { $regex: req.query.keyword, $options: 'i' },
-          primaryCategories: category,
+          primaryCategories: { $regex: category, $options: 'i' },
         }
-      : { primaryCategories: category }
+      : { primaryCategories: { $regex: category, $options: 'i' } }
   }
   const count = await Product.countDocuments({ ...keywordQuery })
 

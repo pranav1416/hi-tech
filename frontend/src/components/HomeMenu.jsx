@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row, Tabs, Tab, Dropdown } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts, listAllTopProducts } from '../actions/homeActions'
+import { useSelector } from 'react-redux'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom'
 import Loader from './Loader'
 import Message from './Message'
 import Product from './Product'
@@ -174,27 +175,9 @@ const prods = [
 const HomeMenu = ({ specialProduct, saleProducts, topProducts }) => {
   const homeData = useSelector((state) => state.homeData)
   const { loadingData, error } = homeData
-  // const dispatch = useDispatch()
-  // const productAllTopRated = useSelector((state) => state.productAllTopRated)
-  // const { loading, productTopEight, error } = productAllTopRated
 
-  // const productFetch = useSelector((state) => state.productFetch)
-  // const { products } = productFetch
-
-  // const productSpecial = useSelector((state) => state.productSpecial)
-  // const { loadingSpecial, specialProduct } = productSpecial
-
-  // let saleProducts = []
   useEffect(() => {}, [specialProduct, saleProducts, topProducts])
 
-  // const getSaleProducts = (products) => {
-  //   const saleProducts = products.filter(
-  //     (product) =>
-  //       product.prices.isSale === true &&
-  //       product.prices.amountMax > product.prices.amountMin
-  //   )
-  //   return saleProducts.slice(0, 8)
-  // }
   return (
     <Row style={{ paddingTop: '0.5rem', paddingLeft: '0.5rem' }}>
       {loadingData ? (
@@ -212,17 +195,29 @@ const HomeMenu = ({ specialProduct, saleProducts, topProducts }) => {
                     id='dropdown-basic'
                     style={{ width: '100%', height: '2.5rem' }}
                   >
-                    All Categories
+                    Browse Categories
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu style={{ width: '100%' }}>
-                    <Dropdown.Item href='#/action-1'>Audio</Dropdown.Item>
-                    <Dropdown.Item href='#/action-2'>Computers</Dropdown.Item>
-                    <Dropdown.Item href='#/action-3'>TV</Dropdown.Item>
-                    <Dropdown.Item href='#/action-4'>
+                    <Dropdown.Item as={Link} to='/search/page/1/all'>
+                      All Categories
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link} to='/search/page/1/Audio'>
+                      Audio
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link} to='/search/page/1/Computers'>
+                      Computers
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link} to='/search/page/1/TV'>
+                      TV
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link} to='/search/page/1/Mobile'>
+                      Mobile
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link} to='/search/page/1/Cameras'>
                       Cameras/Camcorders
                     </Dropdown.Item>
-                    <Dropdown.Item href='#/action-5'>
+                    <Dropdown.Item as={Link} to='/search/page/1/Car'>
                       Car Electronics
                     </Dropdown.Item>
                   </Dropdown.Menu>

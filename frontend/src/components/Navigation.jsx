@@ -1,60 +1,56 @@
 import React from 'react'
-import Card from 'react-bootstrap/Card'
-import {
-  Navbar,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-  Container,
-} from 'react-bootstrap'
+import { Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import { useLocation } from 'react-router-dom'
 import { Row, Col, Tab } from 'react-bootstrap'
-import { Fragment, Component, render } from 'react'
-import ListGroup from 'react-bootstrap/ListGroup'
-//import { get } from 'mongoose';
-
-// function handleClick(Tab) {
-//   Tab.preventDefault();
-//     console.log('The tab was clicked.')
-//      }
-
-// const [NavigationState, setNavigationState] = useState("/browser")
 
 const Navigation = () => {
+  var location = useLocation()
+  const pos = location.pathname.lastIndexOf('/')
+  let urlPath
+  if (isNaN(location.pathname[pos + 1])) {
+    var temp = location.pathname.slice(0, pos).lastIndexOf('/')
+    urlPath = location.pathname.slice(0, temp) + '/1'
+  } else {
+    urlPath = location.pathname.slice(0, pos) + '/1'
+  }
+
   return (
-    <Tab.Container id='left-tabs-example' defaultActiveKey='first'>
+    <Tab.Container id='left-tabs-example'>
       <Row style={{ width: '100%' }}>
         <Col sm={3}>
           <Nav variant='pills' className='flex-column'>
-            {/* value={NavigationState}
-       onChange = {(e) => {
-        const selectedNavigation = e.target.value
-        setNavigationState(selectedNavigation)
-     }
-      }> */}
             <Nav.Item>
-              <Nav.Link
-                /*onClick={handleClick}*/ href='/browser'
-                eventKey='first'
-              >
-                All Categories
-              </Nav.Link>
+              <LinkContainer to={urlPath + '/all'}>
+                <Nav.Link eventKey='all'>All Categories</Nav.Link>
+              </LinkContainer>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey='second'>Laptops</Nav.Link>
+              <LinkContainer to={urlPath + '/Audio'}>
+                <Nav.Link eventKey='Audio'>Audio</Nav.Link>
+              </LinkContainer>
             </Nav.Item>
-
             <Nav.Item>
-              <Nav.Link eventKey='third'>Mobiles</Nav.Link>
+              <LinkContainer to={urlPath + '/Computers'}>
+                <Nav.Link eventKey='Computers'>Computers</Nav.Link>
+              </LinkContainer>
             </Nav.Item>
-
             <Nav.Item>
-              <Nav.Link eventKey='fourth'>Home Automation</Nav.Link>
+              <LinkContainer to={urlPath + '/TV'}>
+                <Nav.Link eventKey='TV'>TV</Nav.Link>
+              </LinkContainer>
             </Nav.Item>
-
             <Nav.Item>
-              <Nav.Link eventKey='fifth'>Office Tech</Nav.Link>
+              <LinkContainer to={urlPath + '/Cameras'}>
+                <Nav.Link eventKey='Cameras/Camcorders'>
+                  Cameras/Camcorders
+                </Nav.Link>
+              </LinkContainer>
+            </Nav.Item>
+            <Nav.Item>
+              <LinkContainer to={urlPath + '/Car'}>
+                <Nav.Link eventKey='Car Electronics'>Car Electronics</Nav.Link>
+              </LinkContainer>
             </Nav.Item>
           </Nav>
         </Col>
