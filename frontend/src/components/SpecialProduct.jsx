@@ -19,6 +19,10 @@ const SpecialProduct = ({ specialProduct }) => {
   const homeData = useSelector((state) => state.homeData)
   const { loadingData, error } = homeData
 
+  const avg =
+    specialProduct.reviews.reduce((sum, review) => sum + review.reviewRating, 0) /
+    specialProduct.reviews.length
+
   return (
     <Row>
       {loadingData ? (
@@ -47,7 +51,7 @@ const SpecialProduct = ({ specialProduct }) => {
 
             <Card.Text as='div'>
               <Rating
-                value={specialProduct.avg}
+                value={avg}
                 text={specialProduct.reviews.length}
               />
             </Card.Text>
