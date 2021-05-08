@@ -25,24 +25,23 @@ body {
   margin-left: 200px;
 }
 
-  .mystyle-checkout{
-    color: black;
-    padding-bottom: 15px;
-    padding-top: 15px;
-    font-family: Arial;
-    text-align: left;
-    padding-left: 0%;
-    
-  }
-  .radio {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-  .checkoutForm{
-    margin: auto;
-  }
+.mystyle-checkout {
+  color: black;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  font-family: Arial;
+  text-align: left;
+  padding-left: 0%;
+}
+.radio {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.checkoutForm {
+  margin: auto;
+}
 
 .expriation_date {
   padding-left: 0px !important;
@@ -52,21 +51,15 @@ body {
   margin-top: 20px;
 }
 
-<<<<<<< HEAD
 .expriation_cvv {
   padding-right: 0px !important;
 }
-=======
-  .expriation_cvv {
-    padding-right: 0px !important;
-  }
 
-  .checkout_required:after {
-    content:" *" !important;
-    color: red !important;
-  }
+.checkout_required:after {
+  content: ' *' !important;
+  color: red !important;
+}
 
-  .inline_dispaly {
-    display:inline;
-  }
->>>>>>> 317a141fcaff844e774cd772d305d1b1f027a942
+.inline_dispaly {
+  display: inline;
+}
